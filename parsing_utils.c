@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcarlen <jcarlen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 15:31:12 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/23 16:20:37 by jcarlen          ###   ########.ch       */
+/*   Updated: 2023/02/24 11:28:13 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,6 @@ int	new_atoi(char *str)
 		res = nbr * is_negative;
 	}
 	return (res);
-}
-
-int	ft_isspace(unsigned char c)
-{
-	if (c == '\t' || c == '\n' || c == '\v'
-		|| c == '\f' || c == '\r' || c == ' ' || c == ',')
-		return (0);
-	return (1);
 }
 
 double	my_atof(const char *str, double	b)

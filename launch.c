@@ -3,54 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   launch.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcarlen <jcarlen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:31:27 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/23 14:26:20 by jcarlen          ###   ########.ch       */
+/*   Updated: 2023/02/24 11:11:53 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MiniRT.h"
-/*
-void	load_scene(t_rays *rays)
+
+void	load_scene(t_data *data)
 {
 	int		hit;
 	int		hit2;
 
-	rays->win_i = 0;
+	data->mlx.win_i = 0;
 	hit = FALSE;
-	ft_init_window(rays);
-	while (rays->win_i < H)
+	ft_init_window(data);
+	while (data->mlx.win_i < H)
 	{
-		rays->win_y = 0;
-		while (rays->win_y < W)
+		data->mlx.win_y = 0;
+		while (data->mlx.win_y < W)
 		{
-			rays->t = 100000;
-			rays->t = 100000;
-			rays->t = 100000;
-			set_scene(rays);
-			hit = inter_cylinder(rays);
-			hit2 = inter_plane(rays);
+			data->rays.t = 100000;
+			data->rays.t1 = 100000;
+			data->rays.t2 = 100000;
+			set_scene(data);
+			// hit = inter_cylinder(rays);
+			// hit2 = inter_plane(rays);
 			if (hit == TRUE || hit2 == TRUE)
 			{
 				// rays->light.n = get_light(rays);
-				rays->light.n = add_amb(rays);
-				// my_mlx_pixel_put(rays, rays->win_y, rays->win_i,
+				//data->rays.n = add_amb(rays); write add_amb again
+				// my_mlx_pixel_put(rays, data->mlx.win_y, data->mlx.win_i,
 				// 	color(100, 0, 70));
-				my_mlx_pixel_put(rays, rays->win_y, (H - rays->win_i - 1),
-					color((ft_max((rays->light.n.x))), ft_max(((rays->light.n.y))), ft_max((rays->light.n.z))));
-				// my_mlx_pixel_put(rays, rays->win_y, (H - rays->win_i - 1),
+				my_mlx_pixel_put(data, data->mlx.win_y, (H - data->mlx.win_i - 1),
+					color(ft_max(data->rays.n.x), ft_max(data->rays.n.y), ft_max(data->rays.n.z)));
+				// my_mlx_pixel_put(rays, data->mlx.win_y, (H - data->mlx.win_i - 1),
 				// 	color((ft_max(rays->light.intens_pixel.x)),
 				// 		(ft_max(rays->light.intens_pixel.y)),
 				// 		(ft_max(rays->light.intens_pixel.z))));
 			}
-			rays->win_y++;
+			data->mlx.win_y++;
 		}
-		rays->win_i++;
+		data->mlx.win_i++;
 	}
-	mlx_put_image_to_window(rays->mlx_ptr, rays->win_ptr, rays->img, 0, 0);
+	mlx_put_image_to_window(data->mlx.mlx_ptr, data->mlx.win_ptr, data->mlx.img, 0, 0);
 }
-
+/*write add amb again*/
+/*
 t_vector	add_amb(t_rays *rays)
 {
 	rays->light.n.x *= (rays->a_light_color.col_r \

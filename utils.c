@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikki <nikki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 16:19:00 by nikki             #+#    #+#             */
-/*   Updated: 2023/02/17 16:19:36 by nikki            ###   ########.fr       */
+/*   Updated: 2023/02/24 11:28:17 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MiniRT.h"
 
-void	my_mlx_pixel_put(t_rays *rays, int x, int y, int color)
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = rays->addr + (y * rays->line_length + x * (rays->bits_per_pixel / 8));
+	dst = data->mlx.addr + (y * data->mlx.line_length + x * (data->mlx.bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
 

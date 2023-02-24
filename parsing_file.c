@@ -162,9 +162,9 @@ void convert_tab(char **tab, t_data *data)
 				new_l->type = *ret[0];
 				new_l->ratio = ft_strtof(ret[1]);
 				vector = split_string(ret[2], ',');
-				new_l->color.col_r = ft_strtof(vector[0]);
-				new_l->color.col_g = ft_strtof(vector[1]);
-				new_l->color.col_b = ft_strtof(vector[2]);
+				new_l->color.x = ft_strtof(vector[0]);
+				new_l->color.y = ft_strtof(vector[1]);
+				new_l->color.z = ft_strtof(vector[2]);
 				if (data->light == NULL)
 					data->light = new_l;
 				else
@@ -207,9 +207,9 @@ print_tab(ret);
 				free_tab(vector);
 				new_l->ratio = ft_strtof(ret[2]);
 				vector = split_string(ret[3], ',');
-				new_l->color.col_r = ft_strtof(vector[0]);
-				new_l->color.col_g = ft_strtof(vector[1]);
-				new_l->color.col_b = ft_strtof(vector[2]);
+				new_l->color.x = ft_strtof(vector[0]);
+				new_l->color.y = ft_strtof(vector[1]);
+				new_l->color.z = ft_strtof(vector[2]);
 				if (data->light == NULL)
 					data->light = new_l;
 				else
@@ -235,11 +235,11 @@ print_tab(ret);
 				free_tab(vector);
 				new_f->sphere_rad = (ft_strtof(ret[2]) / 2);
 				vector = split_string(ret[3], ',');
-				new_f->color.col_r = ft_strtof(vector[0]);
-				new_f->color.col_g = ft_strtof(vector[1]);
-				new_f->color.col_b = ft_strtof(vector[2]);
+				new_f->color.x = ft_strtof(vector[0]);
+				new_f->color.y = ft_strtof(vector[1]);
+				new_f->color.z = ft_strtof(vector[2]);
 				if (data->object == NULL)
-					data->object = new_l;
+					data->object = new_f;
 				else
 				{
 					last = last_obj(data);
@@ -267,11 +267,11 @@ print_tab(ret);
 				new_f->orient.z = ft_strtof(vector[2]);
 				free_tab(vector);
 				vector = split_string(ret[3], ',');
-				new_f->color.col_r = ft_strtof(vector[0]);
-				new_f->color.col_g = ft_strtof(vector[1]);
-				new_f->color.col_b = ft_strtof(vector[2]);
+				new_f->color.x = ft_strtof(vector[0]);
+				new_f->color.y = ft_strtof(vector[1]);
+				new_f->color.z = ft_strtof(vector[2]);
 				if (data->object == NULL)
-					data->object = new_l;
+					data->object = new_f;
 				else
 				{
 					last = last_obj(data);
@@ -301,11 +301,11 @@ print_tab(ret);
 				new_f->cyl_dia = ft_strtof(ret[3]);
 				new_f->cyl_height = ft_strtof(ret[4]);
 				vector = split_string(ret[5], ',');
-				new_f->color.col_r = ft_strtof(vector[0]);
-				new_f->color.col_g = ft_strtof(vector[1]);
-				new_f->color.col_b = ft_strtof(vector[2]);
+				new_f->color.x = ft_strtof(vector[0]);
+				new_f->color.y = ft_strtof(vector[1]);
+				new_f->color.z = ft_strtof(vector[2]);
 				if (data->object == NULL)
-					data->object = new_l;
+					data->object = new_f;
 				else
 				{
 					last = last_obj(data);

@@ -11,9 +11,9 @@ t_form *init_form(void)
 	form->coord.x = 0.0f;
 	form->coord.y = 0.0f;
 	form->coord.z = 0.0f;
-	form->color.col_r = 0.0;
-	form->color.col_g = 0.0;
-	form->color.col_b = 0.0;
+	form->color.x = 0.0;
+	form->color.y = 0.0;
+	form->color.z = 0.0;
 	form->orient.x = 0.0f;
 	form->orient.y = 0.0f;
 	form->orient.z = 0.0f;
@@ -31,9 +31,9 @@ t_light *init_light(void)
 	light = malloc(sizeof(t_light));
 	if (!light)
 		return (NULL);
-	light->color.col_r = 0.0;
-	light->color.col_g = 0.0;
-	light->color.col_g = 0.0;
+	light->color.x = 0.0;
+	light->color.y = 0.0;
+	light->color.z = 0.0;
 	light->coord.x = 0.0f;
 	light->coord.y = 0.0f;
 	light->coord.z = 0.0f;

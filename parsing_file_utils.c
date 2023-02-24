@@ -41,44 +41,44 @@ int ft_stoi(char *str)
 
 float ft_strtof(const char* str)
 {
-    float result = 0.0f;
-    int is_negative = 0;
-    float decimal_multiplier = 0.1f;
+	float result = 0.0f;
+	int is_negative = 0;
+	float decimal_multiplier = 0.1f;
 
-    while (ft_isspace(*str))
-        str++;
-    if (*str == '-')
+	while (ft_isspace(*str))
+		str++;
+	if (*str == '-')
 	{
-        is_negative = 1;
-        str++;
-    } 
+		is_negative = 1;
+		str++;
+	} 
 	else if (*str == '+')
-        str++;
-    while (ft_isdigit(*str)) 
+		str++;
+	while (ft_isdigit(*str)) 
 	{
-        result = result * 10.0f + (*str - '0');
-        str++;
-    }
-    if (*str == '.') 
+		result = result * 10.0f + (*str - '0');
+		str++;
+	}
+	if (*str == '.') 
 	{
-        str++;
-        while (ft_isdigit(*str)) 
+		str++;
+		while (ft_isdigit(*str)) 
 		{
-            result += decimal_multiplier * (*str - '0');
-            decimal_multiplier *= 0.1f;
-            str++;
-        }
-    }
-    if (is_negative)
-        result = -result;
-    while (ft_isspace(*str))
-        str++;
-    if (*str != '\0') 
+			result += decimal_multiplier * (*str - '0');
+			decimal_multiplier *= 0.1f;
+			str++;
+		}
+	}
+	if (is_negative)
+		result = -result;
+	while (ft_isspace(*str))
+		str++;
+	if (*str != '\0') 
 	{
-        printf("Error: invalid input string\n");
-        return 0.0f;
-    }
-    return result;
+		printf("Error: invalid input string\n");
+		return 0.0f;
+	}
+	return result;
 }
 
 int ft_strinstr(const char *str, const char *substr)
