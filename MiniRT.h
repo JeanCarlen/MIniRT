@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:30 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/24 14:55:29 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/02/24 15:21:24 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,3 +195,19 @@ char 		*ft_strcpy(char *dest, char *src, size_t dest_size);
 char 		*ft_strncpy(char *dest, const char *src, size_t n);
 char 		*ft_realloc(char *org, int n_size);
 #endif
+
+
+
+/*TO DO*/
+/*
+Verif parsing erreurs possibles
+ajouter caps au cylindres
+verifier si les planes sont justes
+shadows
+ambient light
+plusieurs lumières
+Fix cylindre qu'on voit de derrière
+orientation de la camera
+LEAKS
+NORMINETTE
+*/
