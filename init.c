@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:14:48 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/24 10:36:39 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/02/24 13:59:14 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,5 @@ void	set_scene(t_data *data)
 	data->rays.ray_dir.x = ((float)data->mlx.win_y - W / 2);
 	data->rays.ray_dir.y = ((float)data->mlx.win_i - H / 2);
 	data->rays.ray_dir.z = -W / (2 * tan(data->camera.fov / 2));
-	normalize(data->rays.ray_dir);
+	// normalize(data->rays.ray_dir);
 }

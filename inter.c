@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:21:40 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/24 10:59:54 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/02/24 13:51:16 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,7 @@ int	inter_sphere(t_data *data, t_form *current)
 	float		delta;
 	t_vector	oc;
 	float 		d;
-	t_vector	color;
 
-	color.x = 1;
-	color.y = 0;
-	color.z = 0;
 	oc = minus(data->rays.ray_orig, current->coord);
 	a = dot(data->rays.ray_dir, data->rays.ray_dir);
 	b = 2.0f * (dot(oc, data->rays.ray_dir));
@@ -44,8 +40,8 @@ int	inter_sphere(t_data *data, t_form *current)
 		data->rays.t = data->rays.t1;
 	data->rays.p = (ft_plus((data->rays.ray_orig), ft_mult(data->rays.t, data->rays.ray_dir)));
 	data->rays.n = normalize((minus(data->rays.p, current->coord)));
-	rays->light.light_dir = normalize(rays->light.light_dir);
-	d = (dot(data->rays.n, ft_mult(-1, rays->light.light_dir)));
+	data->light->light_dir = normalize(data->light->light_dir);
+	d = (dot(data->rays.n, ft_mult(-1, data->light->light_dir)));
 	data->rays.n = ft_mult(d, current->color);
 	return (TRUE);
 }
@@ -121,14 +117,34 @@ int	inter_cylinder(t_data *data, t_form *current)
 	}
 	vm = ft_mult(m, current->orient);
 	data->rays.n =	normalize(minus(minus(data->rays.p, current->coord), vm));
-	rays->light.light_dir = normalize(rays->light.light_dir);
-	d = (dot(data->rays.n, ft_mult(-1, rays->light.light_dir)));
-	data->rays.n = ft_mult(d, rays->cyl.cyl_clr);
+	data->light->light_dir = normalize(data->light->light_dir);
+	d = (dot(data->rays.n, ft_mult(-1, data->light->light_dir)));
+	data->rays.n = ft_mult(d, current->color);
 	return(TRUE);
 }
 
-// int	routine_inter(t_rays *rays)
-// {
-	
-// }
+int	routine_inter(t_data *data)
+{
+	t_form	*curr;
+	int		hit;
 
+	hit = FALSE;
+	curr = data->object;
+	while (curr)
+	{
+		if (curr->type == 'S')
+		{
+			if (inter_sphere(data, curr))
+				hit = TRUE;
+		}
+		if (curr->type == 'P')
+			if (inter_plane(data, curr))
+				hit = TRUE;
+		if (curr->type == 'C')
+			if (inter_cylinder(data, curr))
+				hit = TRUE;
+		curr = curr->next;
+	}
+	return (hit);
+}
+//dilligaf

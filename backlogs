@@ -1,0 +1,52 @@
+/*char **split_string(const char *str, char sep)
+{
+	size_t count;
+	size_t i;
+	size_t j;
+	size_t len;
+	count = 0;
+	char **result;
+
+	while(str[i])
+	{
+		if (str[i] == sep)
+		{
+			count++;
+		}
+		i++;
+	}
+	for (i = 0; str[i] != '\0'; i++)
+	result = (char **)malloc((count + 2) * sizeof(char *));
+	if (!result)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (str[i] != '\0')
+	{
+		len = 0;
+		while (str[i + len] != sep && str[i + len] != '\0')
+			len++;
+		result[j] = (char *)malloc((len + 1) * sizeof(char));
+		if (!result[j])
+		{
+			i = 0;
+			while(i < j)
+			{
+				free(result[i]);
+				i++;
+			}
+			free(result);
+			return NULL;
+		}
+		strncpy(result[j], str + i, len);
+		result[j][len] = '\0';
+		i += len;
+		if (str[i] == sep)
+		{
+			i++;
+		}
+		j++;
+	}
+	result[j] = NULL;
+	return result;
+}*/

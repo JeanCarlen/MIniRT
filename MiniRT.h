@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:30 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/24 11:28:08 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/02/24 14:03:37 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ typedef struct s_vector
 
 typedef struct s_form
 {
-	char		*type;
+	char		type;
 	t_vector	coord;
-	t_vector	color;
 	t_vector	orient;
+	t_vector	color;
 	float		sphere_rad;
 	float		cyl_dia;
 	float		cyl_height;
@@ -57,7 +57,7 @@ typedef struct s_cam
 {
 	t_vector	pos;
 	t_vector	orient;
-	int			fov;
+	float			fov;
 }	t_cam;
 
 typedef struct s_light
@@ -65,6 +65,7 @@ typedef struct s_light
 	char			type;
 	t_vector		coord;
 	t_vector		color;
+	t_vector		light_dir;
 	float 			ratio;
 	struct s_light 	*next;
 }	t_light;
@@ -73,7 +74,6 @@ typedef struct s_mlx
 {
 	int			win_i;
 	int			win_y;
-	char		**map;
 	void		*img;
 	void		*mlx_ptr;
 	void		*win_ptr;
@@ -118,6 +118,7 @@ void		set_scene(t_data *data);
 int			inter_sphere(t_data *data, t_form *current);
 int			inter_plane(t_data *data, t_form *current);
 int			inter_cylinder(t_data *data, t_form *current);
+int			routine_inter(t_data *data);
 
 /*launch*/
 void		load_scene(t_data *data);
@@ -179,7 +180,7 @@ void		get_camera(t_rays *rays, char *cam);
 t_vector	get_light(t_rays *rays);
 t_vector	ft_minus(t_vector v1, t_vector v2);
 
-t_vector	add_amb(t_rays *rays);
+t_vector	add_amb(t_data *data);
 
 //---------------------//
 

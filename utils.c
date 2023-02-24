@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 16:19:00 by nikki             #+#    #+#             */
-/*   Updated: 2023/02/24 11:28:17 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/02/24 13:29:45 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 int	color(double r, double g, double b)
 {
-	r *= 255;
-	g *= 255;
-	b *= 255;
+	// r *= 255;
+	// g *= 255;
+	// b *= 255;
 	return ((int)r << 16 | (int)g << 8 |(int)b);
 }
 

@@ -7,7 +7,7 @@ t_form *init_form(void)
 	form = malloc (sizeof(t_form));
 	if (!form)
 		return (NULL);
-	form->type = NULL;
+	form->type = '\0';
 	form->coord.x = 0.0f;
 	form->coord.y = 0.0f;
 	form->coord.z = 0.0f;
