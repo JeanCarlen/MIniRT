@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:30 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/24 15:21:24 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/02/24 15:27:29 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,10 +147,6 @@ char		**split_string(const char *str, char sep); //take a string, split the elem
 char **second_split(char *str);
 void		convert_tab(char **tab, t_data *data); //take a tab that contains string, split them and save them in a struct.
 
-/*parsig_utils*/
-int			new_atoi(char *str);
-double		my_atof(const char *str, double b);
-
 /*quit*/
 int			close_window(t_data *data);
 int			escape(int keycode, t_data *data);
@@ -179,21 +175,11 @@ t_vector	add_values(double x, double y, double z);
 
 /*pas trouvé dans les fichiers*/
 
-t_rays		*init_struct(void);
-void		check_args(char *argv);
-void		get_info(t_rays *rays);
-void		get_lightning(t_rays *rays, char *light);
-void		get_camera(t_rays *rays, char *cam);
 t_vector	get_light(t_rays *rays);
 t_vector	ft_minus(t_vector v1, t_vector v2);
 
 t_vector	add_amb(t_data *data);
 
-//---------------------//
-
-char 		*ft_strcpy(char *dest, char *src, size_t dest_size);
-char 		*ft_strncpy(char *dest, const char *src, size_t n);
-char 		*ft_realloc(char *org, int n_size);
 #endif
 
 
@@ -206,8 +192,9 @@ verifier si les planes sont justes
 shadows
 ambient light
 plusieurs lumières
-Fix cylindre qu'on voit de derrière
 orientation de la camera
+refaire realloc
+refaire strncpy
 LEAKS
 NORMINETTE
 */

@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:21:40 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/24 13:51:16 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/02/24 15:27:22 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	inter_cylinder(t_data *data, t_form *current)
 	data->rays.t1 = (-b + sqrt(delta)) / (2 * a);
 	data->rays.t2 = (-b - sqrt(delta)) / (2 * a);
 	t_tmp = data->rays.t;
-	if (data->rays.t2 > data->rays.t)
+	if (data->rays.t2 > data->rays.t || data->rays.t1 < 0)
 		return (FALSE);
 	if (data->rays.t2 > 0)
 		data->rays.t = data->rays.t2;
