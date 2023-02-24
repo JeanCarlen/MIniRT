@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnemeth <nnemeth@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:14:48 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/24 15:17:44 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/02/24 16:00:42 by nnemeth          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	set_scene(t_data *data)
 	int		bckclr;
 
 	bckclr = 0.28 * (data->mlx.win_i + 1);
-	bckclr += ((1 - bckclr) * color((0.5/255), (0.7 / 255), (1 / 255)) - (bckclr * color((1/255), (1/255), (1/255))));
+	bckclr += ((1 - bckclr) * color((0.5 / 255), (0.7 / 255), (1 / 255))
+			- (bckclr * color((1 / 255), (1 / 255), (1 / 255))));
 	my_mlx_pixel_put(data, data->mlx.win_y, (H - data->mlx.win_i - 1),
 		color(135, 206, 235));
 	data->rays.ray_orig.x = data->camera.pos.x;

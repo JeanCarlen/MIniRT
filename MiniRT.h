@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MiniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnemeth <nnemeth@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:30 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/24 15:27:29 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/02/24 18:15:32 by nnemeth          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 
 # define H 800
 # define W 800
-#define BUFSIZE 1024
+# define BUFSIZE 1024
 
 typedef struct s_vector
 {
@@ -50,20 +50,20 @@ typedef struct s_vector
 
 typedef struct s_form
 {
-	char		type;
-	t_vector	coord;
-	t_vector	orient;
-	t_vector	color;
-	float		sphere_rad;
-	float		cyl_dia;
-	float		cyl_height;
-	struct s_form *next;
+	char			type;
+	t_vector		coord;
+	t_vector		orient;
+	t_vector		color;
+	float			sphere_rad;
+	float			cyl_dia;
+	float			cyl_height;
+	struct s_form	*next;
 }	t_form;
 
 typedef struct s_cam
 {
-	t_vector	pos;
-	t_vector	orient;
+	t_vector		pos;
+	t_vector		orient;
 	float			fov;
 }	t_cam;
 
@@ -73,8 +73,8 @@ typedef struct s_light
 	t_vector		coord;
 	t_vector		color;
 	t_vector		light_dir;
-	float 			ratio;
-	struct s_light 	*next;
+	float			ratio;
+	struct s_light	*next;
 }	t_light;
 
 typedef struct s_mlx
@@ -103,7 +103,7 @@ typedef struct s_rays
 
 typedef struct s_data
 {
-	int 	element;
+	int		element;
 	t_form	*object;
 	t_cam	camera;
 	t_light	*light;
@@ -112,10 +112,11 @@ typedef struct s_data
 }	t_data;
 
 /*init_parsing*/
-t_form 		*init_form();
-t_light 	*init_light();
-void 		init_cam(t_data *data);
+t_form		*init_form(void);
+t_light		*init_light(void);
+void		init_cam(t_data *data);
 void		init_all(t_data *data);
+int			check_args(char *arg);
 
 /*init*/
 void		ft_init_window(t_data *data);
@@ -133,9 +134,9 @@ void		load_scene(t_data *data);
 /*parsing_file_utils*/
 void		print_tab(char **tab); //print a tab
 int			ft_stoi(char *str); //convert str to int
-float		ft_strtof(const char* str); //convert str to float
-int 		ft_strinstr(const char* str, const char* substr);//check if there is a specified str in another str
-int			contains_alpha(char* str);//check if there is a alpha char in str
+float		ft_strtof(const char *str); //convert str to float
+int			ft_strinstr(const char *str, const char *substr);//check if there is a specified str in another str
+int			contains_alpha(char *str);//check if there is a alpha char in str
 void		free_tab(char **tab);//free a tab
 int			ft_isspace(int c);
 t_light		*last_light(t_data *data); //finds the last element of the lights liked list and returns it
@@ -144,7 +145,7 @@ t_form		*last_obj(t_data *data); // finds the last element of the objects liked 
 /*parsing_file*/
 char		*readfile(char *filename); //read all the file and return it as a big str
 char		**split_string(const char *str, char sep); //take a string, split the elements every <sep> and return all the elements as a tab
-char **second_split(char *str);
+char		**second_split(char *str);
 void		convert_tab(char **tab, t_data *data); //take a tab that contains string, split them and save them in a struct.
 
 /*quit*/
@@ -175,14 +176,12 @@ t_vector	add_values(double x, double y, double z);
 
 /*pas trouvé dans les fichiers*/
 
-t_vector	get_light(t_rays *rays);
+t_vector	get_light(t_data *data);
 t_vector	ft_minus(t_vector v1, t_vector v2);
 
 t_vector	add_amb(t_data *data);
 
 #endif
-
-
 
 /*TO DO*/
 /*

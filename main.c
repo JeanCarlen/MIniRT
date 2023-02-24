@@ -3,20 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnemeth <nnemeth@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:42 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/24 14:59:56 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/02/24 17:43:06 by nnemeth          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MiniRT.h"
 
-
-static int setup_data(char *arg, t_data *data)
+static int	setup_data(char *arg, t_data *data)
 {
-	char **tab;
-	char *lines;
+	char	**tab;
+	char	*lines;
 
 	tab = NULL;
 	init_all(data);
@@ -27,20 +26,34 @@ static int setup_data(char *arg, t_data *data)
 		free_tab(tab);
 	if(lines)
 		free(lines);*/
-	return 0;
+	return (0);
+}
+
+int	check_args(char *arg)
+{
+	if (!strchr(arg, '.'))
+	{
+		printf("%s\n", "Invalid file!");
+		exit(1);
+	}
+	if (ft_strncmp((ft_strrchr(arg, '.')), ".rt", 4))
+	{
+		printf("%s\n", "Invalid extension!");
+		exit(1);
+	}
+	return (0);
 }
 
 int	main(int argc, char **argv)
 {
-	//t_rays	*rays;
-	t_data *data;
+	t_data	*data;
 
 	data = malloc(sizeof(t_data));
 	if (!data)
 		return (-1);
 	if (argc == 2)
 	{
-		//rays = init_struct();
+		check_args(argv[1]);
 		if (setup_data(argv[1], data) < 0)
 		{
 			printf("Error in the line");

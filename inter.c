@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inter.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnemeth <nnemeth@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:21:40 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/24 15:27:22 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/02/24 18:05:04 by nnemeth          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ int	inter_sphere(t_data *data, t_form *current)
 		data->rays.t = data->rays.t2;
 	else
 		data->rays.t = data->rays.t1;
-	data->rays.p = (ft_plus((data->rays.ray_orig), ft_mult(data->rays.t, data->rays.ray_dir)));
+	data->rays.p = (ft_plus((data->rays.ray_orig), ft_mult(data->rays.t,
+					data->rays.ray_dir)));
 	data->rays.n = normalize((minus(data->rays.p, current->coord)));
 	data->light->light_dir = normalize(data->light->light_dir);
 	d = (dot(data->rays.n, ft_mult(-1, data->light->light_dir)));
@@ -56,6 +57,7 @@ int	inter_plane(t_data *data, t_form *current)
 	float		denom;
 	t_vector	oc;
 	float		t;
+
 	current->orient = normalize(current->orient);
 	denom = dot(data->rays.ray_dir, current->orient);
 	oc = minus(data->rays.ray_orig, current->coord);
@@ -65,11 +67,11 @@ int	inter_plane(t_data *data, t_form *current)
 	if (t < data->rays.t)
 		data->rays.t = t;
 	else
-		return(FALSE);
+		return (FALSE);
 	if (t >= 0.0)
 	{
-		// printf("%f\n", t);
-		data->rays.p = (ft_plus((data->rays.ray_orig), ft_mult(data->rays.t, data->rays.ray_dir)));
+		data->rays.p = (ft_plus((data->rays.ray_orig),
+					ft_mult(data->rays.t, data->rays.ray_dir)));
 		data->rays.n = current->orient;
 		// d = (dot(data->rays.n, ft_mult(-1, rays->light.light_dir)));
 		// data->rays.n = ft_mult(d, rays->light.albedo);
@@ -93,9 +95,12 @@ int	inter_cylinder(t_data *data, t_form *current)
 
 	oc = minus(data->rays.ray_orig, current->coord);
 	current->orient = normalize(current->orient);
-	a = dot(data->rays.ray_dir, data->rays.ray_dir) - powf(dot(data->rays.ray_dir, current->orient), 2);
-	b = 2.0f * (dot(data->rays.ray_dir, oc) - (dot(data->rays.ray_dir, current->orient) * dot(oc, current->orient)));
-	c = dot(oc, oc) - powf(dot(oc, current->orient), 2) - powf(current->cyl_dia / 2, 2);
+	a = dot(data->rays.ray_dir, data->rays.ray_dir)
+		- powf(dot(data->rays.ray_dir, current->orient), 2);
+	b = 2.0f * (dot(data->rays.ray_dir, oc) - (dot(data->rays.ray_dir, \
+		current->orient) * dot(oc, current->orient)));
+	c = dot(oc, oc) - powf(dot(oc, current->orient), 2)
+		- powf(current->cyl_dia / 2, 2);
 	delta = (b * b) - (4 * a * c);
 	if (delta < 0)
 		return (FALSE);
@@ -108,19 +113,21 @@ int	inter_cylinder(t_data *data, t_form *current)
 		data->rays.t = data->rays.t2;
 	else
 		data->rays.t = data->rays.t1;
-	data->rays.p = (ft_plus((data->rays.ray_orig), ft_mult(data->rays.t, data->rays.ray_dir)));
-	m = (dot(data->rays.ray_dir, current->orient) * data->rays.t) + dot(oc, current->orient);
+	data->rays.p = (ft_plus((data->rays.ray_orig),
+				ft_mult(data->rays.t, data->rays.ray_dir)));
+	m = (dot(data->rays.ray_dir, current->orient) * data->rays.t)
+		+ dot(oc, current->orient);
 	if (m < 0 || m > current->cyl_height)
 	{
 		data->rays.t = t_tmp;
 		return (FALSE);
 	}
 	vm = ft_mult(m, current->orient);
-	data->rays.n =	normalize(minus(minus(data->rays.p, current->coord), vm));
+	data->rays.n = normalize(minus(minus(data->rays.p, current->coord), vm));
 	data->light->light_dir = normalize(data->light->light_dir);
 	d = (dot(data->rays.n, ft_mult(-1, data->light->light_dir)));
 	data->rays.n = ft_mult(d, current->color);
-	return(TRUE);
+	return (TRUE);
 }
 
 int	routine_inter(t_data *data)
@@ -129,6 +136,9 @@ int	routine_inter(t_data *data)
 	int		hit;
 
 	hit = FALSE;
+	data->rays.t = 1E99;
+	data->rays.t1 = 100000;
+	data->rays.t2 = 100000;
 	curr = data->object;
 	while (curr)
 	{
@@ -147,4 +157,3 @@ int	routine_inter(t_data *data)
 	}
 	return (hit);
 }
-//dilligaf

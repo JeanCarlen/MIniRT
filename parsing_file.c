@@ -1,17 +1,19 @@
-
 #include "MiniRT.h"
 
-
-char *readfile(char *filename)
+char	*readfile(char *filename)
 {
-	int fd = open(filename, O_RDONLY);
-	char buffer[BUFSIZE];
-	char *line = NULL;
-	size_t line_size = 0;
-	ssize_t bytes_read = 0;
-	int i;
+	int		fd;
+	char	buffer[BUFSIZE];
+	char	*line;
+	size_t	line_size;
+	ssize_t	bytes_read;
+	int		i;
 
 	i = 0;
+	line_size = 0;
+	bytes_read = 0;
+	line = NULL;
+	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		return (NULL);
 	while ((bytes_read = read(fd, buffer, BUFSIZE)) > 0)
@@ -32,7 +34,7 @@ char *readfile(char *filename)
 				line = realloc(line, line_size + bytes_read - i);
 				ft_memcpy(line + line_size, buffer + i, bytes_read - i);
 				line_size += bytes_read - i;
-				break;
+				break ;
 			}
 			i++;
 		}
@@ -47,26 +49,35 @@ char *readfile(char *filename)
 	return (line);
 }
 
-char **split_string(const char *str, char sep)
+char	**split_string(const char *str, char sep)
 {
-	size_t count = 0, i, j, len;
-	char **result;
+	size_t	count;
+	size_t	i;
+	size_t	j;
+	size_t	len;
+	char	**result;
 
-	for (i = 0; str[i] != '\0'; i++)
+	count = 0;
+	i = 0;
+	if (str == NULL)
+	{
+		printf("%s\n", "Invalid extension or empty file!");
+		exit(1);
+	}
+	while (str[i] != '\0')
 	{
 		if (str[i] == sep)
 		{
 			count++;
 		}
+		i++;
 	}
-
 	// allocate space for the result array
 	result = (char **)malloc((count + 2) * sizeof(char *));
 	if (!result)
 	{
-		return NULL;
+		return (NULL);
 	}
-
 	// split the string into elements
 	i = 0;
 	j = 0;
@@ -86,7 +97,7 @@ char **split_string(const char *str, char sep)
 				free(result[i]);
 			}
 			free(result);
-			return NULL;
+			return (NULL);
 		}
 		strncpy(result[j], str + i, len);
 		result[j][len] = '\0';
@@ -98,30 +109,36 @@ char **split_string(const char *str, char sep)
 		j++;
 	}
 	result[j] = NULL;
-	return result;
+	return (result);
 }
 
-char **second_split(char *str)
+char	**second_split(char *str)
 {
-	char **words = NULL;
-	int word_count = 0;
-	char *word_start = str;
-	char *word_end = str;
+	char	**words;
+	int		word_count;
+	char	*word_start;
+	char	*word_end;
+	int		word_length;
 
+	words = NULL;
+	word_count = 0;
+	word_start = str;
+	word_end = str;
 	while (*word_end != '\0')
 	{
 		if (ft_isspace(*word_end))
 		{
 			word_start = word_end + 1;
 			word_end = word_start;
-			continue;
+			continue ;
 		}
 		word_end++;
 		if (ft_isspace(*word_end) || *word_end == '\0')
 		{
 			words = (char **)realloc(words, (word_count + 1) * sizeof(char *));
-			int word_length = word_end - word_start;
-			words[word_count] = (char *)malloc((word_length + 1) * sizeof(char));
+			word_length = word_end - word_start;
+			words[word_count] = (char *)malloc((word_length + 1)
+				* sizeof(char));
 			strncpy(words[word_count], word_start, word_length);
 			words[word_count][word_length] = '\0';
 			word_start = word_end + 1;
@@ -135,15 +152,16 @@ char **second_split(char *str)
 	return (words);
 }
 
-void convert_tab(char **tab, t_data *data)
+void	convert_tab(char **tab, t_data *data)
 {
+	int		x;
+	char	**ret;
+	char	**vector;
 	(void)data;
-	int x = 0;
-	char **ret;
-	char **vector;
 
 	vector = NULL;
 	ret = NULL;
+	x = 0;
 	printf("tab is = \n");
 	print_tab(tab);
 	printf("-------------------\n");
@@ -226,7 +244,7 @@ print_tab(ret);
 				t_form	*last;
 				new_f = init_form();
 				ret = second_split(tab[x]);
-print_tab(ret);
+				print_tab(ret);
 				new_f->type = 'S';
 				vector = split_string(ret[1], ',');
 				new_f->coord.x = ft_strtof(vector[0]);

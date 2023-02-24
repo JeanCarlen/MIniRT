@@ -1,8 +1,8 @@
 #include "MiniRT.h"
 
-t_form *init_form(void)
+t_form	*init_form(void)
 {
-	t_form *form;
+	t_form	*form;
 
 	form = malloc (sizeof(t_form));
 	if (!form)
@@ -24,9 +24,9 @@ t_form *init_form(void)
 	return (form);
 }
 
-t_light *init_light(void)
+t_light	*init_light(void)
 {
-	t_light *light;
+	t_light	*light;
 
 	light = malloc(sizeof(t_light));
 	if (!light)
@@ -42,7 +42,7 @@ t_light *init_light(void)
 	return (light);
 }
 
-void init_cam(t_data *data)
+void	init_cam(t_data *data)
 {
 	data->camera.pos.x = 0.0f;
 	data->camera.pos.y = 0.0f;

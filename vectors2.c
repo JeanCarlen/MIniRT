@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vectors2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikki <nikki@student.42.fr>                +#+  +:+       +#+        */
+/*   By: nnemeth <nnemeth@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:58:16 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/18 12:10:07 by nikki            ###   ########.fr       */
+/*   Updated: 2023/02/24 17:50:23 by nnemeth          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,25 +53,5 @@ t_vector	ft_divide(t_vector v1, double a)
 	new.x = v1.x / a;
 	new.y = v1.y / a;
 	new.z = v1.z / a;
-	return (new);
-}
-
-t_vector	ft_mult_vec(t_vector v1, t_vector v2)
-{
-	t_vector	new;
-
-	new.x = v1.x * v2.x;
-	new.y = v1.y * v2.y;
-	new.z = v1.z * v2.z;
-	return (new);
-}
-
-t_vector	add_values(double x, double y, double z)
-{
-	t_vector new;
-
-	new.x = x;
-	new.y = y;
-	new.z = z;
 	return (new);
 }

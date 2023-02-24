@@ -1,13 +1,11 @@
-
 #include "MiniRT.h"
-
 
 void	print_tab(char **tab)
 {
 	int	i;
 
 	i = 0;
-	if(tab == NULL)
+	if (tab == NULL)
 		return ;
 	while (tab[i])
 	{
@@ -17,12 +15,15 @@ void	print_tab(char **tab)
 	}
 }
 
-int ft_stoi(char *str)
+int	ft_stoi(char *str)
 {
-	int result = 0;
-	int sign = 1;
-	int i = 0;
+	int	result;
+	int	sign;
+	int	i;
 
+	result = 0;
+	sign = 1;
+	i = 0;
 	if (str[0] == '-')
 	{
 		sign = -1;
@@ -33,36 +34,39 @@ int ft_stoi(char *str)
 		if (str[i] >= '0' && str[i] <= '9')
 			result = result * 10 + (str[i] - '0');
 		else
-			return 0;	
+			return (0);
 	++i;
 	}
 	return (sign * result);
 }
 
-float ft_strtof(const char* str)
+float	ft_strtof(const char* str)
 {
-	float result = 0.0f;
-	int is_negative = 0;
-	float decimal_multiplier = 0.1f;
+	float	result;
+	int		is_negative;
+	float	decimal_multiplier;
 
+	result = 0.0f;
+	is_negative = 0;
+	decimal_multiplier = 0.1f;
 	while (ft_isspace(*str))
 		str++;
 	if (*str == '-')
 	{
 		is_negative = 1;
 		str++;
-	} 
+	}
 	else if (*str == '+')
 		str++;
-	while (ft_isdigit(*str)) 
+	while (ft_isdigit(*str))
 	{
 		result = result * 10.0f + (*str - '0');
 		str++;
 	}
-	if (*str == '.') 
+	if (*str == '.')
 	{
 		str++;
-		while (ft_isdigit(*str)) 
+		while (ft_isdigit(*str))
 		{
 			result += decimal_multiplier * (*str - '0');
 			decimal_multiplier *= 0.1f;
@@ -73,19 +77,19 @@ float ft_strtof(const char* str)
 		result = -result;
 	while (ft_isspace(*str))
 		str++;
-	if (*str != '\0') 
+	if (*str != '\0')
 	{
 		printf("Error: invalid input string\n");
-		return 0.0f;
+		return (0.0f);
 	}
-	return result;
+	return (result);
 }
 
 int ft_strinstr(const char *str, const char *substr)
 {
-	int i;
-	int j;
-	int k;
+	int	i;
+	int	j;
+	int	k;
 
 	i = 0;
 	while (str[i] != '\0')
@@ -97,21 +101,21 @@ int ft_strinstr(const char *str, const char *substr)
 			while (substr[j] != '\0')
 			{
 				if (str[k] != substr[j])
-					break;
+					break ;
 				j++;
 				k++;
 			}
 			if (substr[j] == '\0')
-				return 1;
+				return (1);
 		}
 		i++;
 	}
 	return (0);
 }
 
-int contains_alpha(char* str)
+int	contains_alpha(char* str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -130,7 +134,7 @@ void	free_tab(char **tab)
 	int	i;
 
 	i = 0;
-	if(tab == NULL)
+	if (tab == NULL)
 		return ;
 	while (tab[i])
 	{
@@ -139,9 +143,9 @@ void	free_tab(char **tab)
 	}
 }
 
-int		ft_isspace(int c)
+int	ft_isspace(int c)
 {
-	return (c == ' ') || (c >= '\t' && c <= '\r');
+	return ((c == ' ') || (c >= '\t' && c <= '\r'));
 }
 
 t_light	*last_light(t_data *data)
