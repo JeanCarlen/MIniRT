@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:30 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/24 14:03:37 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/02/24 14:55:29 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@
 # define TRUE 1
 # define FALSE 0
 # define KEY_ESC 53
+
+# define UP 126
+# define DOWN 125
+# define RIGHT 124
+# define LEFT 123
+# define J_KEY 38
+# define K_KEY 40
 
 # define H 800
 # define W 800

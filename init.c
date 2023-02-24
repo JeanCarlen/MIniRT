@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:14:48 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/24 13:59:14 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/02/24 15:17:44 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,11 @@ void	set_scene(t_data *data)
 	bckclr = 0.28 * (data->mlx.win_i + 1);
 	bckclr += ((1 - bckclr) * color((0.5/255), (0.7 / 255), (1 / 255)) - (bckclr * color((1/255), (1/255), (1/255))));
 	my_mlx_pixel_put(data, data->mlx.win_y, (H - data->mlx.win_i - 1),
-		ray_color(bckclr, 135, 206, 235));
+		color(135, 206, 235));
 	data->rays.ray_orig.x = data->camera.pos.x;
 	data->rays.ray_orig.y = data->camera.pos.y;
 	data->rays.ray_orig.z = data->camera.pos.z;
 	data->rays.ray_dir.x = ((float)data->mlx.win_y - W / 2);
 	data->rays.ray_dir.y = ((float)data->mlx.win_i - H / 2);
 	data->rays.ray_dir.z = -W / (2 * tan(data->camera.fov / 2));
-	// normalize(data->rays.ray_dir);
 }

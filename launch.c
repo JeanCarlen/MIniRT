@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:31:27 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/24 14:05:57 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/02/24 15:11:16 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	load_scene(t_data *data)
 
 	data->mlx.win_i = 0;
 	curr = data->object;
-	ft_init_window(data);
 	data->light->light_dir.x = 2.1;
 	data->light->light_dir.y = 5.1;
 	data->light->light_dir.z = -2.6;

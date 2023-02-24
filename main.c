@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:42 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/24 13:59:33 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/02/24 14:59:56 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	main(int argc, char **argv)
 			return (-1);
 		}
 		data->camera.fov = data->camera.fov * (M_PI / 180);
+		ft_init_window(data);
 		load_scene(data);
 		mlx_key_hook(data->mlx.win_ptr, escape, data);
 		mlx_hook(data->mlx.win_ptr, 17, 0, close_window, data);
