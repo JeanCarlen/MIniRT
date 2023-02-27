@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnemeth <nnemeth@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:35:23 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/24 16:08:47 by nnemeth          ###   ########.fr       */
+/*   Updated: 2023/02/27 12:03:18 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	escape(int keycode, t_data *data)
 	}
 	mlx_destroy_image(data->mlx.mlx_ptr, data->mlx.img);
 	data->mlx.img = mlx_new_image(data->mlx.mlx_ptr, W, H);
+	data->mlx.addr = mlx_get_data_addr(data->mlx.img, &data->mlx.bits_per_pixel,
+			&data->mlx.line_length, &data->mlx.endian);
 	load_scene(data);
 	return (0);
 }
