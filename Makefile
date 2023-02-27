@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nnemeth <nnemeth@student.42.fr>            +#+  +:+       +#+         #
+#    By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 12:41:46 by nnemeth           #+#    #+#              #
-#    Updated: 2023/02/24 15:47:41 by nnemeth          ###   ########.fr        #
+#    Updated: 2023/02/27 14:11:06 by fmalizia         ###   ########.ch        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ OBJS		= ${SRCS:.c=.o}
 RM			= rm -f
 
 NAME		= miniRT
- 
+
 FRAMEWORK	= -framework OpenGL -framework AppKit
 
 MLXPATH		= ./minilibx/

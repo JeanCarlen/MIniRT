@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MiniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnemeth <nnemeth@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:30 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/24 18:15:32 by nnemeth          ###   ########.fr       */
+/*   Updated: 2023/02/27 14:49:37 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,10 +123,10 @@ void		ft_init_window(t_data *data);
 void		set_scene(t_data *data);
 
 /*inter*/
-int			inter_sphere(t_data *data, t_form *current);
-int			inter_plane(t_data *data, t_form *current);
-int			inter_cylinder(t_data *data, t_form *current);
-int			routine_inter(t_data *data);
+int			inter_sphere(t_data *data, t_form *current, t_rays *ray);
+int			inter_plane(t_data *data, t_form *current, t_rays *ray);
+int			inter_cylinder(t_data *data, t_form *current, t_rays *ray);
+int			routine_inter(t_data *data, t_rays *ray, t_form *skip);
 
 /*launch*/
 void		load_scene(t_data *data);
@@ -173,6 +173,13 @@ double		ft_max(double clr);
 t_vector	ft_divide(t_vector v1, double a);
 t_vector	ft_mult_vec(t_vector v1, t_vector v2);
 t_vector	add_values(double x, double y, double z);
+
+/*free_error*/
+
+int		does_it_segf(char *str);
+int		tab_check(char **tab);
+int		tab_check_rgb(char **tab);
+
 
 /*pas trouvé dans les fichiers*/
 

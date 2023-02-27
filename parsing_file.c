@@ -61,7 +61,6 @@ char	**split_string(const char *str, char sep)
 	i = 0;
 	if (str == NULL)
 	{
-		printf("%s\n", "Invalid extension or empty file!");
 		exit(1);
 	}
 	while (str[i] != '\0')
@@ -175,11 +174,27 @@ void	convert_tab(char **tab, t_data *data)
 				t_light	*new_l;
 				t_light	*last;
 				new_l = init_light();
+				if (does_it_segf(tab[x]) < 0)
+				{
+					if (ret)
+						free_tab(ret);
+					if (vector)
+						free_tab(vector);
+					return ;
+				}
 				ret = second_split(tab[x]);
 				print_tab(ret);
 				new_l->type = *ret[0];
 				new_l->ratio = ft_strtof(ret[1]);
 				vector = split_string(ret[2], ',');
+				if (tab_check_rgb(vector) < 0)
+				{
+					if (ret)
+						free_tab(ret);
+					if (vector)
+						free_tab(vector);
+					return ;
+				}
 				new_l->color.x = ft_strtof(vector[0]);
 				new_l->color.y = ft_strtof(vector[1]);
 				new_l->color.z = ft_strtof(vector[2]);
@@ -198,6 +213,14 @@ void	convert_tab(char **tab, t_data *data)
 				ret = second_split(tab[x]);
 print_tab(ret);
 				vector = split_string(ret[1], ',');
+				if (tab_check(vector) < 0)
+				{
+					if (ret)
+						free_tab(ret);
+					if (vector)
+						free_tab(vector);
+					return ;
+				}				
 				data->camera.pos.x = ft_strtof(vector[0]);
 				data->camera.pos.y = ft_strtof(vector[1]);
 				data->camera.pos.z = ft_strtof(vector[2]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnemeth <nnemeth@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:31:27 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/24 18:16:15 by nnemeth          ###   ########.fr       */
+/*   Updated: 2023/02/27 14:48:19 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ void	load_scene(t_data *data)
 			
 			set_scene(data);
 			// data->rays.n = add_values(150, 0, 10);
-			if (routine_inter(data))
+			if (routine_inter(data, &(data->rays), NULL))
 			{
 			// rays->light.n = get_light(rays);
-			// data->rays.n = add_amb(data);
+				// data->rays.n = add_amb(data);
 				my_mlx_pixel_put(data, data->mlx.win_y, (H - data->mlx.win_i - 1),
 					color(ft_max(data->rays.n.x),
 						ft_max(data->rays.n.y), ft_max(data->rays.n.z)));
@@ -52,11 +52,11 @@ void	load_scene(t_data *data)
 t_vector	add_amb(t_data *data)
 {
 	data->rays.n.x *= (data->light->color.x \
-	* data->light->ratio);
+	* data->light->ratio) ;
 	data->rays.n.y *= (data->light->color.y \
-	* data->light->ratio);
+	* data->light->ratio) ;
 	data->rays.n.z *= (data->light->color.z \
-	* data->light->ratio);
+	* data->light->ratio) ;
 	return (data->rays.n);
 }
 
@@ -65,21 +65,29 @@ t_vector	get_light(t_data *data)
 	double		dot_light;
 	t_vector	minus_tmp;
 	// t_vector	change;
-	t_vector	ray_light;
+	t_rays		ray_light;
 	int			shadow;
 
 	// change.x = 1;
 	// change.y = 1;
 	// change.z = 1;
-	minus_tmp = normalize(minus(data->light->light_dir, data->rays.p));
+	minus_tmp = normalize(minus(data->light->coord, data->rays.p));
 	dot_light = getnorm(minus_tmp);
-	ray_light = ft_plus(data->rays.p, ft_mult(0.01, data->rays.n));
-	shadow = routine_inter(data);
-	if (shadow && data->rays.t * data->rays.t < dot_light)
-		data->rays.n = add_values(0, 0, 0);
+	ray_light.ray_dir = ft_plus(data->rays.p, ft_mult(0.01, data->rays.n));
+	ray_light.ray_orig = data->rays.p;
+	shadow = routine_inter(data, &ray_light, NULL);
+	if (shadow && ray_light.t * ray_light.t < dot_light)
+		ray_light.n = add_values(0, 0, 0);
 	// rays->light.intens_pixel = ft_mult((rays->light.l_bright \
 	// 	* ft_max(dot(minus_tmp, rays->light.n)) / dot_light), rays->light.albedo);
 	// rays->light.intens_pixel = normalize(rays->light.intens_pixel);
 	// rays->light.intens_pixel = ft_mult_vec(rays->light.albedo, rays->light.intens_pixel);
-	return (data->rays.n);
+	return (ray_light.n);
 }
+
+/* 
+1) create a new ray from the surface to the light]
+2) check if the ray intersects with any object
+3) if there is an intersection, and the t2 is less than dot light, there is a shade
+4) send a black pixel 
+*/

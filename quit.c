@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:35:23 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/27 12:03:18 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/02/27 13:50:03 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	escape(int keycode, t_data *data)
 	if (keycode == UP)
 		data->camera.pos.y -= 0.5;
 	if (keycode == RIGHT)
-		data->camera.pos.x += 10;
+		data->camera.pos.x += 1;
 	if (keycode == LEFT)
-		data->camera.pos.x -= 10;
+		data->camera.pos.x -= 1;
 	if (keycode == J_KEY)
 		data->camera.pos.z += 1;
 	if (keycode == K_KEY)
