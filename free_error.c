@@ -11,19 +11,25 @@ int	does_it_segf(char *str)
 	while(str[i])
 	{
 		if (ft_isspace(str[i]))
-			i++;
-		if (str[i] <= 9 && str[i] >= 0)
-			i++;
-		if (str[i] == 'A' || str[i] == 's' || str[i] == 'p' || str[i] == 'C' || str[i] == 'c' 
-			|| str[i] == 'y' || str[i] == 'L' || str[i] == 'p' || str[i] == 'l' || str[i] == '-' || str[i] == '.' )
-			i++;
-		if (str[i] == '\0')
-			return (0);
-		else
 		{
-			printf("This line seems wrong : \n%s\n", str);
-			return (-1);
+			i++;
+			continue;	
 		}
+		if (str[i] <= '9' && str[i] >= '0')
+		{
+			i++;
+			continue;
+		}
+		if (str[i] == 'A' || str[i] == 's' || str[i] == 'p' || str[i] == 'C' || str[i] == 'c' 
+			|| str[i] == 'y' || str[i] == 'L' || str[i] == 'P' || str[i] == 'l' || str[i] == '-' || str[i] == '.' || str[i] == ',' )
+		{
+			i++;
+			continue ;
+		}
+		if (str[i] == '\0' || str[i] ==  '\n')
+			return (0);
+		printf("This line seems wrong : \n%s, wrong char: %c\n", str, str[i]);
+		return (-1);
 	}
 	return (0);
 }
@@ -53,7 +59,7 @@ int	tab_check_rgb(char **tab)
 	while(tab[i])
 	{
 		
-		if (ft_stoi(tab[i]) > 255 && ft_stoi(tab[i]) < 0)
+		if (ft_stoi(tab[i]) > 255 || ft_stoi(tab[i]) < 0)
 		{
 			printf("rgb value are not in range (0-255)\n");
 			return (-1);

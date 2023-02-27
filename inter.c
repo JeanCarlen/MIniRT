@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:21:40 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/27 14:51:23 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/02/27 17:02:33 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,13 @@ int	inter_sphere(t_data *data, t_form *current, t_rays *ray)
 		ray->t = ray->t1;
 	ray->p = (ft_plus((ray->ray_orig), ft_mult(ray->t,
 					ray->ray_dir)));
+	ray->hit_id = current->id;
+	data->light->light_dir = minus(ray->p, data->light->coord);
 	ray->n = normalize((minus(ray->p, current->coord)));
 	data->light->light_dir = normalize(data->light->light_dir);
 	d = (dot(ray->n, ft_mult(-1, data->light->light_dir)));
 	ray->n = ft_mult(d, current->color);
+
 	return (TRUE);
 }
 /*need to fix the light part for the end to work*/
@@ -77,6 +80,7 @@ int	inter_plane(t_data *data, t_form *current, t_rays *ray)
 		// d = (dot(ray->n, ft_mult(-1, rays->light.light_dir)));
 		// ray->n = ft_mult(d, rays->light.albedo);
 		normalize((minus(ray->p, current->orient)));
+		ray->hit_id = current->id;
 		return (TRUE);
 	}
 	return (FALSE);
@@ -124,14 +128,16 @@ int	inter_cylinder(t_data *data, t_form *current, t_rays *ray)
 		return (FALSE);
 	}
 	vm = ft_mult(m, current->orient);
+	data->light->light_dir = minus(ray->p, data->light->coord);
 	ray->n = normalize(minus(minus(ray->p, current->coord), vm));
 	data->light->light_dir = normalize(data->light->light_dir);
 	d = (dot(ray->n, ft_mult(-1, data->light->light_dir)));
 	ray->n = ft_mult(d, current->color);
+	ray->hit_id = current->id;
 	return (TRUE);
 }
 
-int	routine_inter(t_data *data, t_rays *ray, t_form *skip)
+int	routine_inter(t_data *data, t_rays *ray)
 {
 	t_form	*curr;
 	int		hit;
@@ -143,7 +149,7 @@ int	routine_inter(t_data *data, t_rays *ray, t_form *skip)
 	curr = data->object;
 	while (curr)
 	{
-		if (skip == curr)
+		if (data->rays.hit_id == curr->id)
 		{
 			curr = curr->next;
 			continue;

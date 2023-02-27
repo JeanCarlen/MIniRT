@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   launch.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nnemeth <nnemeth@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:31:27 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/27 14:48:19 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/02/27 160:50 by nnemeth          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	load_scene(t_data *data)
 
 	data->mlx.win_i = 0;
 	curr = data->object;
-	data->light->light_dir.x = 2.1;
-	data->light->light_dir.y = 5.1;
-	data->light->light_dir.z = -2.6;
+	data->light->light_dir.x = 0;
+	data->light->light_dir.y = 0;
+	data->light->light_dir.z = -1;
 	while (data->mlx.win_i < H)
 	{
 		data->mlx.win_y = 0;
@@ -28,10 +28,11 @@ void	load_scene(t_data *data)
 		{
 			
 			set_scene(data);
+			data->rays.hit_id = 0;
 			// data->rays.n = add_values(150, 0, 10);
-			if (routine_inter(data, &(data->rays), NULL))
+			if (routine_inter(data, &(data->rays)))
 			{
-			// rays->light.n = get_light(rays);
+				data->rays.n = get_light(data);
 				// data->rays.n = add_amb(data);
 				my_mlx_pixel_put(data, data->mlx.win_y, (H - data->mlx.win_i - 1),
 					color(ft_max(data->rays.n.x),
@@ -71,13 +72,18 @@ t_vector	get_light(t_data *data)
 	// change.x = 1;
 	// change.y = 1;
 	// change.z = 1;
-	minus_tmp = normalize(minus(data->light->coord, data->rays.p));
+	shadow = FALSE;
+	minus_tmp = minus(data->light->coord, data->rays.p);
 	dot_light = getnorm(minus_tmp);
-	ray_light.ray_dir = ft_plus(data->rays.p, ft_mult(0.01, data->rays.n));
-	ray_light.ray_orig = data->rays.p;
-	shadow = routine_inter(data, &ray_light, NULL);
+	minus_tmp = normalize(minus_tmp);
+	ray_light.ray_orig = ft_plus(data->rays.p, ft_mult(0.01, data->rays.n));
+	ray_light.ray_dir = minus_tmp;
+	// ray_light.ray_orig = data->rays.p;
+	shadow = routine_inter(data, &ray_light);
 	if (shadow && ray_light.t * ray_light.t < dot_light)
 		ray_light.n = add_values(0, 0, 0);
+	else
+		ray_light.n = data->rays.n;
 	// rays->light.intens_pixel = ft_mult((rays->light.l_bright \
 	// 	* ft_max(dot(minus_tmp, rays->light.n)) / dot_light), rays->light.albedo);
 	// rays->light.intens_pixel = normalize(rays->light.intens_pixel);

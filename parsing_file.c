@@ -180,7 +180,7 @@ void	convert_tab(char **tab, t_data *data)
 						free_tab(ret);
 					if (vector)
 						free_tab(vector);
-					return ;
+					close_window(data);
 				}
 				ret = second_split(tab[x]);
 				print_tab(ret);
@@ -193,7 +193,7 @@ void	convert_tab(char **tab, t_data *data)
 						free_tab(ret);
 					if (vector)
 						free_tab(vector);
-					return ;
+					close_window(data);;
 				}
 				new_l->color.x = ft_strtof(vector[0]);
 				new_l->color.y = ft_strtof(vector[1]);
@@ -210,6 +210,14 @@ void	convert_tab(char **tab, t_data *data)
 			}
 			if (ft_strinstr(tab[x], "C"))
 			{
+				if (does_it_segf(tab[x]) < 0)
+				{
+					if (ret)
+						free_tab(ret);
+					if (vector)
+						free_tab(vector);
+					close_window(data);
+				}
 				ret = second_split(tab[x]);
 print_tab(ret);
 				vector = split_string(ret[1], ',');
@@ -219,13 +227,21 @@ print_tab(ret);
 						free_tab(ret);
 					if (vector)
 						free_tab(vector);
-					return ;
+					close_window(data);
 				}				
 				data->camera.pos.x = ft_strtof(vector[0]);
 				data->camera.pos.y = ft_strtof(vector[1]);
 				data->camera.pos.z = ft_strtof(vector[2]);
 				free_tab(vector);
 				vector = split_string(ret[2], ',');
+				if (tab_check(vector) < 0)
+				{
+					if (ret)
+						free_tab(ret);
+					if (vector)
+						free_tab(vector);
+					close_window(data);
+				}	
 				data->camera.orient.x = ft_strtof(vector[0]);
 				data->camera.orient.y = ft_strtof(vector[0]);
 				data->camera.orient.z = ft_strtof(vector[0]);
@@ -238,16 +254,41 @@ print_tab(ret);
 				t_light	*new_l;
 				t_light	*last;
 				new_l = init_light();
+				new_l->id = (x + 1);
+				if (does_it_segf(tab[x]) < 0)
+				{
+					if (ret)
+						free_tab(ret);
+					if (vector)
+						free_tab(vector);
+					close_window(data);
+				}
 				ret = second_split(tab[x]);
 print_tab(ret);
 				new_l->type = *ret[0];
 				vector = split_string(ret[1], ',');
+				if (tab_check(vector) < 0)
+				{
+					if (ret)
+						free_tab(ret);
+					if (vector)
+						free_tab(vector);
+					close_window(data);
+				}	
 				new_l->coord.x = ft_strtof(vector[0]);
 				new_l->coord.y = ft_strtof(vector[1]);
 				new_l->coord.z = ft_strtof(vector[2]);
 				free_tab(vector);
 				new_l->ratio = ft_strtof(ret[2]);
 				vector = split_string(ret[3], ',');
+				if (tab_check_rgb(vector) < 0)
+				{
+					if (ret)
+						free_tab(ret);
+					if (vector)
+						free_tab(vector);
+					close_window(data);;
+				}
 				new_l->color.x = ft_strtof(vector[0]);
 				new_l->color.y = ft_strtof(vector[1]);
 				new_l->color.z = ft_strtof(vector[2]);
@@ -266,16 +307,41 @@ print_tab(ret);
 				t_form	*new_f;
 				t_form	*last;
 				new_f = init_form();
+				new_f->id = (x+1);
+				if (does_it_segf(tab[x]) < 0)
+				{
+					if (ret)
+						free_tab(ret);
+					if (vector)
+						free_tab(vector);
+					close_window(data);
+				}
 				ret = second_split(tab[x]);
 				print_tab(ret);
 				new_f->type = 'S';
 				vector = split_string(ret[1], ',');
+				if (tab_check(vector) < 0)
+				{
+					if (ret)
+						free_tab(ret);
+					if (vector)
+						free_tab(vector);
+					close_window(data);
+				}	
 				new_f->coord.x = ft_strtof(vector[0]);
 				new_f->coord.y = ft_strtof(vector[1]);
 				new_f->coord.z = ft_strtof(vector[2]);
 				free_tab(vector);
 				new_f->sphere_rad = (ft_strtof(ret[2]) / 2);
 				vector = split_string(ret[3], ',');
+				if (tab_check_rgb(vector) < 0)
+				{
+					if (ret)
+						free_tab(ret);
+					if (vector)
+						free_tab(vector);
+					close_window(data);;
+				}
 				new_f->color.x = ft_strtof(vector[0]);
 				new_f->color.y = ft_strtof(vector[1]);
 				new_f->color.z = ft_strtof(vector[2]);
@@ -294,20 +360,53 @@ print_tab(ret);
 				t_form	*new_f;
 				t_form	*last;
 				new_f = init_form();
+				new_f->id = (x+1);
+				if (does_it_segf(tab[x]) < 0)
+				{
+					if (ret)
+						free_tab(ret);
+					if (vector)
+						free_tab(vector);
+					close_window(data);
+				}
 				ret = second_split(tab[x]);
 print_tab(ret);
 				new_f->type = 'P';
 				vector = split_string(ret[1], ',');
+				if (tab_check(vector) < 0)
+				{
+					if (ret)
+						free_tab(ret);
+					if (vector)
+						free_tab(vector);
+					close_window(data);
+				}	
 				new_f->coord.x = ft_strtof(vector[0]);
 				new_f->coord.y = ft_strtof(vector[1]);
 				new_f->coord.z = ft_strtof(vector[2]);
 				free_tab(vector);
 				vector = split_string(ret[2], ',');
+				if (tab_check(vector) < 0)
+				{
+					if (ret)
+						free_tab(ret);
+					if (vector)
+						free_tab(vector);
+					close_window(data);
+				}	
 				new_f->orient.x = ft_strtof(vector[0]);
 				new_f->orient.y = ft_strtof(vector[1]);
 				new_f->orient.z = ft_strtof(vector[2]);
 				free_tab(vector);
 				vector = split_string(ret[3], ',');
+				if (tab_check_rgb(vector) < 0)
+				{
+					if (ret)
+						free_tab(ret);
+					if (vector)
+						free_tab(vector);
+					close_window(data);;
+				}
 				new_f->color.x = ft_strtof(vector[0]);
 				new_f->color.y = ft_strtof(vector[1]);
 				new_f->color.z = ft_strtof(vector[2]);
@@ -326,15 +425,40 @@ print_tab(ret);
 				t_form	*new_f;
 				t_form	*last;
 				new_f = init_form();
+				new_f->id = (x+1);
+				if (does_it_segf(tab[x]) < 0)
+				{
+					if (ret)
+						free_tab(ret);
+					if (vector)
+						free_tab(vector);
+					close_window(data);
+				}
 				ret = second_split(tab[x]);
 print_tab(ret);
 				new_f->type = 'C';
 				vector = split_string(ret[1], ',');
+				if (tab_check(vector) < 0)
+				{
+					if (ret)
+						free_tab(ret);
+					if (vector)
+						free_tab(vector);
+					close_window(data);
+				}	
 				new_f->coord.x = ft_strtof(vector[0]);
 				new_f->coord.y = ft_strtof(vector[1]);
 				new_f->coord.z = ft_strtof(vector[2]);
 				free_tab(vector);
 				vector = split_string(ret[2], ',');
+				if (tab_check(vector) < 0)
+				{
+					if (ret)
+						free_tab(ret);
+					if (vector)
+						free_tab(vector);
+					close_window(data);
+				}	
 				new_f->orient.x = ft_strtof(vector[0]);
 				new_f->orient.y = ft_strtof(vector[1]);
 				new_f->orient.z = ft_strtof(vector[2]);
@@ -342,6 +466,14 @@ print_tab(ret);
 				new_f->cyl_dia = ft_strtof(ret[3]);
 				new_f->cyl_height = ft_strtof(ret[4]);
 				vector = split_string(ret[5], ',');
+				if (tab_check_rgb(vector) < 0)
+				{
+					if (ret)
+						free_tab(ret);
+					if (vector)
+						free_tab(vector);
+					close_window(data);;
+				}
 				new_f->color.x = ft_strtof(vector[0]);
 				new_f->color.y = ft_strtof(vector[1]);
 				new_f->color.z = ft_strtof(vector[2]);

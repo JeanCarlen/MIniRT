@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:30 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/27 14:49:37 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/02/27 17:01:46 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_vector
 
 typedef struct s_form
 {
+	int				id;
 	char			type;
 	t_vector		coord;
 	t_vector		orient;
@@ -69,6 +70,7 @@ typedef struct s_cam
 
 typedef struct s_light
 {
+	int				id;
 	char			type;
 	t_vector		coord;
 	t_vector		color;
@@ -99,6 +101,7 @@ typedef struct s_rays
 	t_vector	ray_orig;
 	t_vector	p;
 	t_vector	n;
+	int			hit_id;
 }	t_rays;
 
 typedef struct s_data
@@ -126,7 +129,7 @@ void		set_scene(t_data *data);
 int			inter_sphere(t_data *data, t_form *current, t_rays *ray);
 int			inter_plane(t_data *data, t_form *current, t_rays *ray);
 int			inter_cylinder(t_data *data, t_form *current, t_rays *ray);
-int			routine_inter(t_data *data, t_rays *ray, t_form *skip);
+int			routine_inter(t_data *data, t_rays *ray);
 
 /*launch*/
 void		load_scene(t_data *data);

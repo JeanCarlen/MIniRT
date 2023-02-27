@@ -8,6 +8,7 @@ t_form	*init_form(void)
 	if (!form)
 		return (NULL);
 	form->type = '\0';
+	form->id = 0;
 	form->coord.x = 0.0f;
 	form->coord.y = 0.0f;
 	form->coord.z = 0.0f;
@@ -31,6 +32,7 @@ t_light	*init_light(void)
 	light = malloc(sizeof(t_light));
 	if (!light)
 		return (NULL);
+	light->id = 0;
 	light->color.x = 0.0;
 	light->color.y = 0.0;
 	light->color.z = 0.0;
