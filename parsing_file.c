@@ -166,6 +166,11 @@ void	convert_tab(char **tab, t_data *data)
 	printf("-------------------\n");
 	while (tab[x])
 	{
+		if (tab[x][0] == '\0')
+		{
+			x++;
+			continue;
+		}
 		if (contains_alpha(tab[x]))
 		{
 //			printf("%d = x, string = %s\n", x, tab[x]);

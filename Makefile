@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+         #
+#    By: jcarlen <jcarlen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 12:41:46 by nnemeth           #+#    #+#              #
-#    Updated: 2023/02/27 14:11:06 by fmalizia         ###   ########.ch        #
+#    Updated: 2023/02/28 16:06:48 by jcarlen          ###   ########.ch        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ LIB			= Libft/libft/libft.a
 
 CC			= gcc
 
-CFLAGS		= -Wall -Wextra -Werror -g3 -fsanitize=address 
+CFLAGS		= -Wall -Wextra -Werror -g3 #-fsanitize=address 
 
 SRCS		= $(wildcard *.c)
 
