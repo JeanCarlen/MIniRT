@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:21:40 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/27 17:02:33 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/02/28 11:39:00 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	inter_sphere(t_data *data, t_form *current, t_rays *ray)
 	float		c;
 	float		delta;
 	t_vector	oc;
+	t_light		*c_light;
 	float 		d;
 
 	oc = minus(ray->ray_orig, current->coord);
@@ -41,10 +42,15 @@ int	inter_sphere(t_data *data, t_form *current, t_rays *ray)
 	ray->p = (ft_plus((ray->ray_orig), ft_mult(ray->t,
 					ray->ray_dir)));
 	ray->hit_id = current->id;
-	data->light->light_dir = minus(ray->p, data->light->coord);
+	c_light = data->light;
+	if ( c_light && c_light->type != 'L')
+		c_light = c_light->next;
+	if (!c_light)
+		return(TRUE);
+	c_light->light_dir = minus(ray->p, c_light->coord);
 	ray->n = normalize((minus(ray->p, current->coord)));
-	data->light->light_dir = normalize(data->light->light_dir);
-	d = (dot(ray->n, ft_mult(-1, data->light->light_dir)));
+	c_light->light_dir = normalize(c_light->light_dir);
+	d = (dot(ray->n, ft_mult(-1, c_light->light_dir)));
 	ray->n = ft_mult(d, current->color);
 
 	return (TRUE);
@@ -60,8 +66,9 @@ int	inter_plane(t_data *data, t_form *current, t_rays *ray)
 	float		denom;
 	t_vector	oc;
 	float		t;
+	t_light		*c_light;
+	float 		d;
 
-	(void)data;
 	current->orient = normalize(current->orient);
 	denom = dot(ray->ray_dir, current->orient);
 	oc = minus(ray->ray_orig, current->coord);
@@ -74,12 +81,19 @@ int	inter_plane(t_data *data, t_form *current, t_rays *ray)
 		return (FALSE);
 	if (t >= 0.0)
 	{
+		c_light = data->light;
+		if ( c_light && c_light->type != 'L')
+			c_light = c_light->next;
+		if (!c_light)
+		return(TRUE);
 		ray->p = (ft_plus((ray->ray_orig),
 					ft_mult(ray->t, ray->ray_dir)));
 		ray->n = current->orient;
-		// d = (dot(ray->n, ft_mult(-1, rays->light.light_dir)));
-		// ray->n = ft_mult(d, rays->light.albedo);
-		normalize((minus(ray->p, current->orient)));
+		c_light->light_dir = minus(ray->p, c_light->coord);
+		// ray->n = normalize((minus(ray->p, current->orient)));
+		c_light->light_dir = normalize(c_light->light_dir);
+		d = (dot(ray->n, ft_mult(-1, c_light->light_dir)));
+		ray->n = ft_mult(d, current->color);
 		ray->hit_id = current->id;
 		return (TRUE);
 	}
@@ -97,6 +111,7 @@ int	inter_cylinder(t_data *data, t_form *current, t_rays *ray)
 	float		t_tmp;
 	t_vector	vm;
 	t_vector	oc;
+	t_light		*c_light;
 
 	oc = minus(ray->ray_orig, current->coord);
 	current->orient = normalize(current->orient);
@@ -128,14 +143,20 @@ int	inter_cylinder(t_data *data, t_form *current, t_rays *ray)
 		return (FALSE);
 	}
 	vm = ft_mult(m, current->orient);
-	data->light->light_dir = minus(ray->p, data->light->coord);
+	c_light = data->light;
+	if ( c_light && c_light->type != 'L')
+		c_light = c_light->next;
+	if (!c_light)
+		return(TRUE);
+	c_light->light_dir = minus(ray->p, c_light->coord);
 	ray->n = normalize(minus(minus(ray->p, current->coord), vm));
-	data->light->light_dir = normalize(data->light->light_dir);
-	d = (dot(ray->n, ft_mult(-1, data->light->light_dir)));
+	c_light->light_dir = normalize(c_light->light_dir);
+	d = (dot(ray->n, ft_mult(-1, c_light->light_dir)));
 	ray->n = ft_mult(d, current->color);
 	ray->hit_id = current->id;
 	return (TRUE);
 }
+/*take light calculation and put it in its own function*/
 
 int	routine_inter(t_data *data, t_rays *ray)
 {

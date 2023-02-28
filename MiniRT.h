@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:30 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/27 17:01:46 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/02/28 11:55:05 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,21 +189,19 @@ int		tab_check_rgb(char **tab);
 t_vector	get_light(t_data *data);
 t_vector	ft_minus(t_vector v1, t_vector v2);
 
-t_vector	add_amb(t_data *data);
+t_vector	add_amb(t_data *data, t_rays *ray);
 
 #endif
 
 /*TO DO*/
 /*
-Verif parsing erreurs possibles
 ajouter caps au cylindres
-verifier si les planes sont justes
-shadows
-ambient light
+shadows --ISH
 plusieurs lumières
-orientation de la camera
+orientation de la camera (big step small step)
 refaire realloc
 refaire strncpy
 LEAKS
-NORMINETTE
+pertty makefile
+exit and error
 */

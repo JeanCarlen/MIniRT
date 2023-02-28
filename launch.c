@@ -33,7 +33,6 @@ void	load_scene(t_data *data)
 			if (routine_inter(data, &(data->rays)))
 			{
 				data->rays.n = get_light(data);
-				// data->rays.n = add_amb(data);
 				my_mlx_pixel_put(data, data->mlx.win_y, (H - data->mlx.win_i - 1),
 					color(ft_max(data->rays.n.x),
 						ft_max(data->rays.n.y), ft_max(data->rays.n.z)));
@@ -50,15 +49,15 @@ void	load_scene(t_data *data)
 		data->mlx.img, 0, 0);
 }
 
-t_vector	add_amb(t_data *data)
+t_vector	add_amb(t_data *data, t_rays *ray)
 {
-	data->rays.n.x *= (data->light->color.x \
-	* data->light->ratio) ;
-	data->rays.n.y *= (data->light->color.y \
-	* data->light->ratio) ;
-	data->rays.n.z *= (data->light->color.z \
-	* data->light->ratio) ;
-	return (data->rays.n);
+	ray->n.x += (data->light->color.x \
+	* data->light->ratio);
+	ray->n.y += (data->light->color.y \
+	* data->light->ratio);
+	ray->n.z += (data->light->color.z \
+	* data->light->ratio);
+	return (ray->n);
 }
 
 t_vector	get_light(t_data *data)
@@ -88,6 +87,7 @@ t_vector	get_light(t_data *data)
 	// 	* ft_max(dot(minus_tmp, rays->light.n)) / dot_light), rays->light.albedo);
 	// rays->light.intens_pixel = normalize(rays->light.intens_pixel);
 	// rays->light.intens_pixel = ft_mult_vec(rays->light.albedo, rays->light.intens_pixel);
+	add_amb(data, &ray_light);
 	return (ray_light.n);
 }
 

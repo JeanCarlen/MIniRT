@@ -340,7 +340,7 @@ print_tab(ret);
 						free_tab(ret);
 					if (vector)
 						free_tab(vector);
-					close_window(data);;
+					close_window(data);
 				}
 				new_f->color.x = ft_strtof(vector[0]);
 				new_f->color.y = ft_strtof(vector[1]);
