@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:21:40 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/28 11:39:00 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/02/28 15:30:26 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	inter_sphere(t_data *data, t_form *current, t_rays *ray)
 	if ( c_light && c_light->type != 'L')
 		c_light = c_light->next;
 	if (!c_light)
-		return(TRUE);
+		return(FALSE);
 	c_light->light_dir = minus(ray->p, c_light->coord);
 	ray->n = normalize((minus(ray->p, current->coord)));
 	c_light->light_dir = normalize(c_light->light_dir);
@@ -85,7 +85,7 @@ int	inter_plane(t_data *data, t_form *current, t_rays *ray)
 		if ( c_light && c_light->type != 'L')
 			c_light = c_light->next;
 		if (!c_light)
-		return(TRUE);
+			return(FALSE);
 		ray->p = (ft_plus((ray->ray_orig),
 					ft_mult(ray->t, ray->ray_dir)));
 		ray->n = current->orient;
@@ -147,7 +147,7 @@ int	inter_cylinder(t_data *data, t_form *current, t_rays *ray)
 	if ( c_light && c_light->type != 'L')
 		c_light = c_light->next;
 	if (!c_light)
-		return(TRUE);
+		return(FALSE);
 	c_light->light_dir = minus(ray->p, c_light->coord);
 	ray->n = normalize(minus(minus(ray->p, current->coord), vm));
 	c_light->light_dir = normalize(c_light->light_dir);

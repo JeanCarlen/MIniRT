@@ -67,12 +67,21 @@ t_vector	get_light(t_data *data)
 	// t_vector	change;
 	t_rays		ray_light;
 	int			shadow;
+	t_light		*c_light;
 
 	// change.x = 1;
 	// change.y = 1;
 	// change.z = 1;
 	shadow = FALSE;
-	minus_tmp = minus(data->light->coord, data->rays.p);
+	c_light = data->light;
+	if ( c_light && c_light->type != 'L')
+		c_light = c_light->next;
+	if (!c_light)
+	{
+		ray_light.n = data->rays.n;
+		return (ray_light.n);
+	}
+	minus_tmp = minus(c_light->coord, data->rays.p);
 	dot_light = getnorm(minus_tmp);
 	minus_tmp = normalize(minus_tmp);
 	ray_light.ray_orig = ft_plus(data->rays.p, ft_mult(0.01, data->rays.n));
@@ -87,7 +96,7 @@ t_vector	get_light(t_data *data)
 	// 	* ft_max(dot(minus_tmp, rays->light.n)) / dot_light), rays->light.albedo);
 	// rays->light.intens_pixel = normalize(rays->light.intens_pixel);
 	// rays->light.intens_pixel = ft_mult_vec(rays->light.albedo, rays->light.intens_pixel);
-	add_amb(data, &ray_light);
+	// add_amb(data, &ray_light);
 	return (ray_light.n);
 }
 
