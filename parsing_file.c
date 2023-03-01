@@ -15,14 +15,17 @@ char	*readfile(char *filename)
 	line = NULL;
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		return (NULL);
+	{
+		printf("file : %s doesn't exist", filename);
+		exit(0);
+	}
 	while ((bytes_read = read(fd, buffer, BUFSIZE)) > 0)
 	{
 		while (i < bytes_read)
 		{
 			if (buffer[i] == '\n')
 			{
-				line = realloc(line, line_size + i + 1);
+				line = ft_realloc_rt(line, line_size + i + 1);
 				ft_memcpy(line + line_size, buffer, i);
 				line[line_size + i] = '\0';
 				line_size += i + 1;
@@ -31,7 +34,7 @@ char	*readfile(char *filename)
 			}
 			else
 			{
-				line = realloc(line, line_size + bytes_read - i);
+				line = ft_realloc_rt(line, line_size + bytes_read - i);
 				ft_memcpy(line + line_size, buffer + i, bytes_read - i);
 				line_size += bytes_read - i;
 				break ;
@@ -42,46 +45,42 @@ char	*readfile(char *filename)
 	}
 	if (line_size > 0)
 	{
-		line = realloc(line, line_size + 1);
+		line = ft_realloc_rt(line, line_size + 1);
 		ft_memcpy(line + line_size, "\0", 1);
 	}
 	close(fd);
 	return (line);
 }
 
-char	**split_string(const char *str, char sep)
+char **split_string(const char *str, char sep)
 {
-	size_t	count;
-	size_t	i;
-	size_t	j;
-	size_t	len;
-	char	**result;
+	size_t count = 0;
+	size_t i = 0;
+	size_t j = 0;
+	size_t len = 0;
+	char **result = NULL;
 
-	count = 0;
-	i = 0;
 	if (str == NULL)
 	{
-		exit(1);
+		return (NULL);
 	}
-	while (str[i] != '\0')
+	while (str[i])
 	{
-		if (str[i] == sep)
-		{
-			count++;
-		}
-		i++;
+		count += (str[i++] == sep);
 	}
-	// allocate space for the result array
 	result = (char **)malloc((count + 2) * sizeof(char *));
 	if (!result)
 	{
 		return (NULL);
 	}
-	// split the string into elements
 	i = 0;
-	j = 0;
-	while (str[i] != '\0')
+	while (str[i])
 	{
+		if (str[i] == sep)
+		{
+			i++;
+			continue;
+		}
 		len = 0;
 		while (str[i + len] != sep && str[i + len] != '\0')
 		{
@@ -90,26 +89,23 @@ char	**split_string(const char *str, char sep)
 		result[j] = (char *)malloc((len + 1) * sizeof(char));
 		if (!result[j])
 		{
-			// free memory if allocation fails
-			for (i = 0; i < j; i++)
+			while (j-- > 0)
 			{
-				free(result[i]);
+				free(result[j]);
+				result[j] = (NULL);
 			}
 			free(result);
 			return (NULL);
 		}
-		strncpy(result[j], str + i, len);
+		ft_strncpy_rt(result[j], str + i, len);
 		result[j][len] = '\0';
 		i += len;
-		if (str[i] == sep)
-		{
-			i++;
-		}
 		j++;
 	}
 	result[j] = NULL;
 	return (result);
 }
+
 
 char	**second_split(char *str)
 {
@@ -118,11 +114,13 @@ char	**second_split(char *str)
 	char	*word_start;
 	char	*word_end;
 	int		word_length;
+	int		i;
 
 	words = NULL;
 	word_count = 0;
 	word_start = str;
 	word_end = str;
+
 	while (*word_end != '\0')
 	{
 		if (ft_isspace(*word_end))
@@ -134,22 +132,55 @@ char	**second_split(char *str)
 		word_end++;
 		if (ft_isspace(*word_end) || *word_end == '\0')
 		{
-			words = (char **)realloc(words, (word_count + 1) * sizeof(char *));
+			char **temp_words = (char **)ft_realloc_rt_tab(words, (word_count + 1) * sizeof(char *));
+			if (!temp_words)
+			{
+				i = 0;
+				while(i < word_count)
+				{
+					free(words[i]);
+					i++;
+				}
+				free(words);
+				return NULL;
+			}
+			words = temp_words;
 			word_length = word_end - word_start;
-			words[word_count] = (char *)malloc((word_length + 1)
-				* sizeof(char));
-			strncpy(words[word_count], word_start, word_length);
+			words[word_count] = (char *)malloc((word_length + 1) * sizeof(char));
+			if (!words[word_count])
+			{
+				i = 0;
+				while(i < word_count)
+				{
+					free(words[i]);
+					i++;
+				}
+				free(words);
+				return NULL;
+			}
+			ft_strncpy_rt(words[word_count], word_start, word_length);
 			words[word_count][word_length] = '\0';
 			word_start = word_end + 1;
 			word_count++;
 		}
 	}
-	words = (char **)realloc(words, (word_count + 1) * sizeof(char *));
+	char **temp_words = (char **)ft_realloc_rt_tab(words, (word_count + 1) * sizeof(char *));
+	if (!temp_words)
+	{
+	i = 0;
+		while(i < word_count)
+		{
+			free(words[i]);
+			i++;
+		}
+		free(words);
+		return NULL;
+	}
+	words = temp_words;
 	words[word_count] = NULL;
-	//free(word_start);
-	//free(word_end);
-	return (words);
+	return words;
 }
+
 
 void	convert_tab(char **tab, t_data *data)
 {

@@ -14,10 +14,8 @@
 
 void	load_scene(t_data *data)
 {
-	t_form	*curr;
 
 	data->mlx.win_i = 0;
-	curr = data->object;
 	// data->light->light_dir.x = 0;
 	// data->light->light_dir.y = 0;
 	// data->light->light_dir.z = -1;
@@ -64,14 +62,10 @@ t_vector	get_light(t_data *data)
 {
 	double		dot_light;
 	t_vector	minus_tmp;
-	// t_vector	change;
 	t_rays		ray_light;
 	int			shadow;
 	t_light		*c_light;
 
-	// change.x = 1;
-	// change.y = 1;
-	// change.z = 1;
 	shadow = FALSE;
 	c_light = data->light;
 	if ( c_light && c_light->type != 'L')
@@ -89,7 +83,9 @@ t_vector	get_light(t_data *data)
 	ray_light.ray_orig = data->rays.p;
 	shadow = routine_inter(data, &ray_light);
 	if (shadow && ray_light.t * ray_light.t < dot_light)
-		ray_light.n = add_values(0, 0, 0);
+		ray_light.n = add_values(data->rays.n.x * data->light->ratio * (data->light->color.x / 255), \
+				data->rays.n.y * data->light->ratio * (data->light->color.y / 255), \
+				data->rays.n.z * data->light->ratio * (data->light->color.z / 255));
 	else
 		ray_light.n = data->rays.n;
 	// rays->light.intens_pixel = ft_mult((rays->light.l_bright \

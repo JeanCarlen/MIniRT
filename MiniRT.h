@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MiniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jeancarlen <jeancarlen@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:30 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/28 11:55:05 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/01 18:01:58 by jeancarlen       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ void		free_tab(char **tab);//free a tab
 int			ft_isspace(int c);
 t_light		*last_light(t_data *data); //finds the last element of the lights liked list and returns it
 t_form		*last_obj(t_data *data); // finds the last element of the objects liked list and returns it
+void		*ft_realloc_rt_tab(void *ptr, size_t size);
 
 /*parsing_file*/
 char		*readfile(char *filename); //read all the file and return it as a big str
@@ -190,18 +191,20 @@ t_vector	get_light(t_data *data);
 t_vector	ft_minus(t_vector v1, t_vector v2);
 
 t_vector	add_amb(t_data *data, t_rays *ray);
+char *ft_strncpy_rt(char *dest, const char *src, size_t n);
+void *ft_realloc_rt(void *ptr, size_t size);
 
 #endif
 
 /*TO DO*/
 /*
 ajouter caps au cylindres
-shadows --ISH
+shadows --ISH --ish
+passer lumière ambiante a la place de data->light...
 plusieurs lumières
 orientation de la camera (big step small step)
-refaire realloc
-refaire strncpy
-LEAKS
+LEAKS --ish
 pertty makefile
 exit and error
+libft/libft ? nicole ? + echo ...?
 */
