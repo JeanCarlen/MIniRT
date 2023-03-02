@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   MiniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: jcarlen <jcarlen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:30 by nnemeth           #+#    #+#             */
 /*   Updated: 2023/03/02 15:16:01 by jcarlen          ###   ########.ch       */
+=======
+/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/26 12:41:30 by nnemeth           #+#    #+#             */
+/*   Updated: 2023/03/02 14:52:40 by fmalizia         ###   ########.ch       */
+>>>>>>> bdaccda732f8e67a0e8f9418ce347c07088f2c30
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +27,7 @@
 # include <fcntl.h>
 # include <ctype.h>
 # include "minilibx/mlx.h"
-# include "Libft/libft/libft.h"
+# include "libft/libft.h"
 
 # define BUFFER_SIZE 42
 # define KEY_ESC 53
@@ -206,7 +213,6 @@ passer lumière ambiante a la place de data->light...
 plusieurs lumières
 orientation de la camera (big step small step)
 LEAKS --ish
-pertty makefile
+pertty makefile --ish
 exit and error
-libft/libft ? nicole ? + echo ...?
 */
