@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nnemeth <nnemeth@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/26 12:41:30 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/02 18:06:20 by nnemeth          ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2023/03/02 18:14:26 by nnemeth          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #ifndef MINIRT_H
 # define MINIRT_H
@@ -20,7 +22,7 @@
 # include <fcntl.h>
 # include <ctype.h>
 # include "minilibx/mlx.h"
-# include "libft/libft.h"
+# include "Libft/libft.h"
 
 # define BUFFER_SIZE 42
 # define KEY_ESC 53
