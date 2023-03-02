@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:30 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/02 15:55:11 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/02 15:57:23 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <fcntl.h>
 # include <ctype.h>
 # include "minilibx/mlx.h"
-# include "Libft/libft.h"
+# include "libft/libft.h"
 
 # define BUFFER_SIZE 42
 # define KEY_ESC 53
