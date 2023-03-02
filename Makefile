@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+         #
+#    By: jcarlen <jcarlen@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 12:41:46 by nnemeth           #+#    #+#              #
-#    Updated: 2023/03/02 11:12:56 by fmalizia         ###   ########.ch        #
+#    Updated: 2023/03/02 15:42:28 by jcarlen          ###   ########.ch        #
 #                                                                              #
 # **************************************************************************** #
 
-LIB			= libft/libft.a
+LIB			= Libft/libft.a
 
 CC			= gcc
 
@@ -44,7 +44,7 @@ all:	start ${NAME}
 $(NAME): ${OBJS}
 		@printf "\n"
 		@$(MAKE) -s -C ${MLXPATH}
-		@$(MAKE) -C ./libft
+		@$(MAKE) -C ./Libft
 		@$(CC) $(CFLAGS) $(FRAMEWORK) $(SRCS) $(LMLX) $(LIB) -o $(NAME)
 
 clean:
@@ -52,7 +52,7 @@ clean:
 		@${RM} $(OBJS)
 
 fclean:	clean
-		@make fclean -C libft
+		@make fclean -C Libft
 		@printf "**Deleting miniRT **\n"
 		@${RM} ${NAME}
 

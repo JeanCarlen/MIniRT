@@ -73,3 +73,34 @@ int	tab_check_rgb(char **tab)
 	}
 	return (0);
 }
+
+void	free_struc(t_data *data)
+{
+	t_form	*current;
+	t_form	*next;
+
+	current = data->object;
+	next = current;
+	while (next)
+	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
+	free(data->object);
+}
+
+void	free_light(t_data *data)
+{
+	t_light	*current;
+	t_light	*next;
+
+	current = data->light;
+	next = current;
+	while (next)
+	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
+}

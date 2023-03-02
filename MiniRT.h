@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:30 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/02 15:37:13 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/02 15:55:11 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <fcntl.h>
 # include <ctype.h>
 # include "minilibx/mlx.h"
-# include "libft/libft.h"
+# include "Libft/libft.h"
 
 # define BUFFER_SIZE 42
 # define KEY_ESC 53
@@ -193,6 +193,8 @@ t_vector	ft_minus(t_vector v1, t_vector v2);
 t_vector	add_amb(t_data *data, t_rays *ray);
 char *ft_strncpy_rt(char *dest, const char *src, size_t n);
 void *ft_realloc_rt(void *ptr, size_t size);
+void	free_struc(t_data *data);
+void	free_light(t_data *data);
 
 #endif
 
@@ -203,7 +205,6 @@ shadows --ISH --ish
 passer lumière ambiante a la place de data->light...
 plusieurs lumières
 orientation de la camera (big step small step)
-LEAKS --ish
-pertty makefile --ish
-exit and error
+dividing big function
+error
 */
