@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:30 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/02 10:37:33 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/02 14:52:40 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,7 +204,6 @@ passer lumière ambiante a la place de data->light...
 plusieurs lumières
 orientation de la camera (big step small step)
 LEAKS --ish
-pertty makefile
+pertty makefile --ish
 exit and error
-libft/libft ? nicole ? + echo ...?
 */

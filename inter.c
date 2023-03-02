@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inter.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnemeth <nnemeth@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:21:40 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/02 11:08:16 by nnemeth          ###   ########.fr       */
+/*   Updated: 2023/03/02 14:50:30 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	inter_plane(t_data *data, t_form *current, t_rays *ray)
 	// current->coord = normalize(current->coord);
 	denom = dot(ray->ray_dir, current->orient);
 	oc = minus(current->coord, ray->ray_orig);
-	t = (dot(oc, current->orient)) / denom;
+	t = dot(oc, current->orient) / denom;
 	if (t < 0)
 		return (FALSE);
 	if (t < ray->t)
@@ -84,9 +84,7 @@ int	inter_plane(t_data *data, t_form *current, t_rays *ray)
 		ray->p = (ft_plus((ray->ray_orig),
 					ft_mult(ray->t, ray->ray_dir)));
 		ray->n = current->orient;
-		c_light->light_dir = minus(ray->p, c_light->coord);
-		// ray->n = normalize((minus(ray->p, current->orient)));
-		c_light->light_dir = normalize(c_light->light_dir);
+		c_light->light_dir = normalize(minus(ray->p, c_light->coord));
 		d = (dot(ray->n, ft_mult(-1, c_light->light_dir)));
 		ray->n = ft_mult(d, current->color);
 		ray->hit_id = current->id;
@@ -122,20 +120,28 @@ int	inter_cylinder(t_data *data, t_form *current, t_rays *ray)
 	ray->t1 = (-b + sqrt(delta)) / (2 * a);
 	ray->t2 = (-b - sqrt(delta)) / (2 * a);
 	t_tmp = ray->t;
-	if (ray->t2 > ray->t || ray->t1 < 0)
+	if (ray->t2 > ray->t)
 		return (FALSE);
 	if (ray->t2 > 0)
 		ray->t = ray->t2;
-	else
+	else if (ray->t1 > 0)
 		ray->t = ray->t1;
+	else
+		return (FALSE);
 	ray->p = (ft_plus((ray->ray_orig),
 				ft_mult(ray->t, ray->ray_dir)));
 	m = (dot(ray->ray_dir, current->orient) * ray->t)
 		+ dot(oc, current->orient);
 	if (m < 0 || m > current->cyl_height)
 	{
-		ray->t = t_tmp;
-		return (FALSE);
+		m = (dot(ray->ray_dir, current->orient) * ray->t1)
+		+ dot(oc, current->orient);
+		if (m < 0 || m > current->cyl_height)
+		{
+			ray->t = t_tmp;
+			return (FALSE);
+		}
+		ray->t = ray->t1;
 	}
 	vm = ft_mult(m, current->orient);
 	c_light = data->light;
@@ -144,7 +150,10 @@ int	inter_cylinder(t_data *data, t_form *current, t_rays *ray)
 	if (!c_light)
 		return (FALSE);
 	c_light->light_dir = minus(ray->p, c_light->coord);
+	// if (ray->t2 == ray->t)
 	ray->n = normalize(minus(minus(ray->p, current->coord), vm));
+	// else
+	// 	ray->n = current->orient;
 	c_light->light_dir = normalize(c_light->light_dir);
 	d = (dot(ray->n, ft_mult(-1, c_light->light_dir)));
 	ray->n = ft_mult(d, current->color);
