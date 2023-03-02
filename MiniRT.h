@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MiniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeancarlen <jeancarlen@student.42.fr>      +#+  +:+       +#+        */
+/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:30 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/01 18:01:58 by jeancarlen       ###   ########.fr       */
+/*   Updated: 2023/03/02 10:37:33 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <fcntl.h>
 # include <ctype.h>
 # include "minilibx/mlx.h"
-# include "Libft/libft/libft.h"
+# include "libft/libft.h"
 
 # define BUFFER_SIZE 42
 # define KEY_ESC 53
