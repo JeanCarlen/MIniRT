@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MiniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcarlen <jcarlen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nnemeth <nnemeth@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:30 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/02 15:44:31 by jcarlen          ###   ########.ch       */
+/*   Updated: 2023/03/02 18:06:20 by nnemeth          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <fcntl.h>
 # include <ctype.h>
 # include "minilibx/mlx.h"
-# include "Libft/libft.h"
+# include "libft/libft.h"
 
 # define BUFFER_SIZE 42
 # define KEY_ESC 53
@@ -120,6 +120,7 @@ t_light		*init_light(void);
 void		init_cam(t_data *data);
 void		init_all(t_data *data);
 int			check_args(char *arg);
+void		run_program(t_data *data);
 
 /*init*/
 void		ft_init_window(t_data *data);
@@ -130,27 +131,37 @@ int			inter_sphere(t_data *data, t_form *current, t_rays *ray);
 int			inter_plane(t_data *data, t_form *current, t_rays *ray);
 int			inter_cylinder(t_data *data, t_form *current, t_rays *ray);
 int			routine_inter(t_data *data, t_rays *ray);
+int			hit_point(t_data *data, t_form *current, t_rays *ray);
+int			plane_found(t_data *data, t_form *current, t_rays *ray);
 
 /*launch*/
 void		load_scene(t_data *data);
+t_vector	get_light(t_data *data);
+void	light_details(t_data *data, t_light *c_light);
 
 /*parsing_file_utils*/
 void		print_tab(char **tab); //print a tab
 int			ft_stoi(char *str); //convert str to int
 float		ft_strtof(const char *str); //convert str to float
-int			ft_strinstr(const char *str, const char *substr);//check if there is a specified str in another str
+//check if there is a specified str in another str
+int			ft_strinstr(const char *str, const char *substr);
 int			contains_alpha(char *str);//check if there is a alpha char in str
 void		free_tab(char **tab);//free a tab
 int			ft_isspace(int c);
-t_light		*last_light(t_data *data); //finds the last element of the lights liked list and returns it
-t_form		*last_obj(t_data *data); // finds the last element of the objects liked list and returns it
+//finds the last element of the lights liked list and returns it
+t_light		*last_light(t_data *data);
+// finds the last element of the objects liked list and returns it
+t_form		*last_obj(t_data *data);
 void		*ft_realloc_rt_tab(void *ptr, size_t size);
 
 /*parsing_file*/
-char		*readfile(char *filename); //read all the file and return it as a big str
-char		**split_string(const char *str, char sep); //take a string, split the elements every <sep> and return all the elements as a tab
+//read all the file and return it as a big str
+char		*readfile(char *filename);
+//take a str, split the elements every <sep> and rtn all the elements as a tab
+char		**split_string(const char *str, char sep);
 char		**second_split(char *str);
-void		convert_tab(char **tab, t_data *data); //take a tab that contains string, split them and save them in a struct.
+//take a tab that contains string, split them and save them in a struct.
+void		convert_tab(char **tab, t_data *data);
 
 /*quit*/
 int			close_window(t_data *data);
@@ -161,6 +172,7 @@ void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int			color(double r, double g, double b);
 int			ray_color(int t, int r, int g, int b);
 int			color2(double r, double g, double b);
+void		init_t(t_rays *ray);
 
 /*vectors*/
 double		getnorm(t_vector vector);
@@ -180,21 +192,19 @@ t_vector	add_values(double x, double y, double z);
 
 /*free_error*/
 
-int		does_it_segf(char *str);
-int		tab_check(char **tab);
-int		tab_check_rgb(char **tab);
-
+int			does_it_segf(char *str);
+int			tab_check(char **tab);
+int			tab_check_rgb(char **tab);
 
 /*pas trouvé dans les fichiers*/
 
-t_vector	get_light(t_data *data);
 t_vector	ft_minus(t_vector v1, t_vector v2);
 
 t_vector	add_amb(t_data *data, t_rays *ray);
-char *ft_strncpy_rt(char *dest, const char *src, size_t n);
-void *ft_realloc_rt(void *ptr, size_t size);
-void	free_struc(t_data *data);
-void	free_light(t_data *data);
+char		*ft_strncpy_rt(char *dest, const char *src, size_t n);
+void		*ft_realloc_rt(void *ptr, size_t size);
+void		free_struc(t_data *data);
+void		free_light(t_data *data);
 
 #endif
 
