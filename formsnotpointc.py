@@ -1,5 +1,5 @@
 
-								/*SPHERE*/
+	##################################SPHERE##################################
 /*
 void	sphere(char *str)
 {
@@ -15,35 +15,7 @@ void	sphere(char *str)
 			free_tab(vector);
 		close_window(data);
 	}
-	ret = second_split(tab[x]);
-	print_tab(ret);
-	new_f->type = 'S';
-	vector = split_string(ret[1], ',');
-	if (tab_check(vector) < 0)
-	{
-		if (ret)
-			free_tab(ret);
-		if (vector)
-			free_tab(vector);
-		close_window(data);
-	}	
-	new_f->coord.x = ft_strtof(vector[0]);
-	new_f->coord.y = ft_strtof(vector[1]);
-	new_f->coord.z = ft_strtof(vector[2]);
-	free_tab(vector);
-	new_f->sphere_rad = (ft_strtof(ret[2]) / 2);
-	vector = split_string(ret[3], ',');
-	if (tab_check_rgb(vector) < 0)
-	{
-		if (ret)
-			free_tab(ret);
-		if (vector)
-			free_tab(vector);
-		close_window(data);
-	}
-	new_f->color.x = ft_strtof(vector[0]);
-	new_f->color.y = ft_strtof(vector[1]);
-	new_f->color.z = ft_strtof(vector[2]);
+	sphere_2(tab[x], new_f);
 	if (data->object == NULL)
 		data->object = new_f;
 	else
@@ -51,11 +23,23 @@ void	sphere(char *str)
 		last = last_obj(data);
 		last->next = new_f;
 	}
-	free_tab(vector);
 	free_tab(ret);	
 }
 
-								PLAN
+void	sphere_2(char *str, t_form *new_f)
+{
+	char **ret;
+
+	ret = second_split(str);
+	new_f->type = 'S';
+	vector = split_string(ret[1], ',');
+	put_coord_form(vector, new_f);
+	new_f->sphere_rad = (ft_strtof(ret[2]) / 2);
+	vector = split_string(ret[3], ',');
+	put_color_form(vector, new_f);
+}
+
+			##################################PLAN##################################
 /*
 void	plan(char *str)
 {
@@ -71,47 +55,7 @@ void	plan(char *str)
 			free_tab(vector);
 		close_window(data);
 	}
-	ret = second_split(tab[x]);
-	print_tab(ret);
-	new_f->type = 'P';
-	vector = split_string(ret[1], ',');
-	if (tab_check(vector) < 0)
-	{
-		if (ret)
-			free_tab(ret);
-		if (vector)
-			free_tab(vector);
-		close_window(data);
-	}	
-	new_f->coord.x = ft_strtof(vector[0]);
-	new_f->coord.y = ft_strtof(vector[1]);
-	new_f->coord.z = ft_strtof(vector[2]);
-	free_tab(vector);
-	vector = split_string(ret[2], ',');
-	if (tab_check(vector) < 0)
-	{
-		if (ret)
-			free_tab(ret);
-		if (vector)
-			free_tab(vector);
-		close_window(data);
-	}	
-	new_f->orient.x = ft_strtof(vector[0]);
-	new_f->orient.y = ft_strtof(vector[1]);
-	new_f->orient.z = ft_strtof(vector[2]);
-	free_tab(vector);
-	vector = split_string(ret[3], ',');
-	if (tab_check_rgb(vector) < 0)
-	{
-		if (ret)
-			free_tab(ret);
-		if (vector)
-			free_tab(vector);
-		close_window(data);;
-	}
-	new_f->color.x = ft_strtof(vector[0]);
-	new_f->color.y = ft_strtof(vector[1]);
-	new_f->color.z = ft_strtof(vector[2]);
+	plan_2(tab[x], new_f);
 	if (data->object == NULL)
 		data->object = new_f;
 	else
@@ -119,13 +63,27 @@ void	plan(char *str)
 		last = last_obj(data);
 		last->next = new_f;
 	}
-	free_tab(vector);
 	free_tab(ret);
+}
+
+void plan_2(char *str, t_form *new_f)
+{
+	char **ret;
+
+	ret = second_split(str);
+	new_f->type = 'P';
+	vector = split_string(ret[1], ',');
+	put_coord_form(vector, new_f);
+	vector = split_string(ret[2], ',');
+	put_orient_form(vector, new_f);
+	vector = split_string(ret[3], ',');
+	put_color_form(vector, new_f);
 }
 
 
 
-								CYLINDRE
+
+##################################CYLINDRE##################################
 /*
 void cylindre(char *str)
 {
@@ -141,7 +99,7 @@ void cylindre(char *str)
 			free_tab(vector);
 		close_window(data);
 	}
-	cylindre_2(str, new_f);
+	cylindre_2(tab[x], new_f);
 	if (data->object == NULL)
 		data->object = new_f;
 	else
@@ -153,7 +111,9 @@ void cylindre(char *str)
 
 void cylindre_2(char *str, t_form *new_f)
 {
-	ret = second_split(tab[x]);
+	char **ret;
+
+	ret = second_split(str);
 	new_f->type = 'C';
 	vector = split_string(ret[1], ',');
 	put_coord_form(vector, new_f);
@@ -165,6 +125,8 @@ void cylindre_2(char *str, t_form *new_f)
 	put_color_form(vector, new_f);
 	free_tab(ret);
 }
+
+##################################Put_form##################################
 
 void put_color_form(char **tab, t_form *new_f)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcarlen <jcarlen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:35:23 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/27 13:50:03 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/02 15:16:25 by jcarlen          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 int	close_window(t_data *data)
 {
-	(void)data;
+	free_struc(data);
+	free_light(data);
+	free(data);
+	data = NULL;
 	exit(0);
 	return (0);
 }

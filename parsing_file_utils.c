@@ -141,6 +141,7 @@ void	free_tab(char **tab)
 		free(tab[i]);
 		++i;
 	}
+	free(tab);
 }
 
 int	ft_isspace(int c)

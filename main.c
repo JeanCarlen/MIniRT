@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnemeth <nnemeth@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jcarlen <jcarlen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:42 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/02/24 17:43:06 by nnemeth          ###   ########.fr       */
+/*   Updated: 2023/03/02 15:06:34 by jcarlen          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@ static int	setup_data(char *arg, t_data *data)
 	lines = readfile(arg);
 	tab = split_string(lines, '\n');
 	convert_tab(tab, data);
-	/*if(tab)
-		free_tab(tab);
 	if(lines)
-		free(lines);*/
+		free(lines);
 	return (0);
 }
 

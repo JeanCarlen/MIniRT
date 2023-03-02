@@ -132,19 +132,7 @@ char	**second_split(char *str)
 		word_end++;
 		if (ft_isspace(*word_end) || *word_end == '\0')
 		{
-			char **temp_words = (char **)ft_realloc_rt_tab(words, (word_count + 1) * sizeof(char *));
-			if (!temp_words)
-			{
-				i = 0;
-				while(i < word_count)
-				{
-					free(words[i]);
-					i++;
-				}
-				free(words);
-				return NULL;
-			}
-			words = temp_words;
+			words = (char **)ft_realloc_rt_tab(words, (word_count + 1) * sizeof(char *));
 			word_length = word_end - word_start;
 			words[word_count] = (char *)malloc((word_length + 1) * sizeof(char));
 			if (!words[word_count])
@@ -164,21 +152,9 @@ char	**second_split(char *str)
 			word_count++;
 		}
 	}
-	char **temp_words = (char **)ft_realloc_rt_tab(words, (word_count + 1) * sizeof(char *));
-	if (!temp_words)
-	{
-	i = 0;
-		while(i < word_count)
-		{
-			free(words[i]);
-			i++;
-		}
-		free(words);
-		return NULL;
-	}
-	words = temp_words;
+	words = (char **)ft_realloc_rt_tab(words, (word_count + 1) * sizeof(char *));
 	words[word_count] = NULL;
-	return words;
+	return (words);
 }
 
 
@@ -192,9 +168,7 @@ void	convert_tab(char **tab, t_data *data)
 	vector = NULL;
 	ret = NULL;
 	x = 0;
-	printf("tab is = \n");
 	print_tab(tab);
-	printf("-------------------\n");
 	while (tab[x])
 	{
 		if (tab[x][0] == '\0')
@@ -204,7 +178,6 @@ void	convert_tab(char **tab, t_data *data)
 		}
 		if (contains_alpha(tab[x]))
 		{
-//			printf("%d = x, string = %s\n", x, tab[x]);
 			if (ft_strinstr(tab[x], "A"))
 			{
 				t_light	*new_l;
@@ -219,7 +192,6 @@ void	convert_tab(char **tab, t_data *data)
 					close_window(data);
 				}
 				ret = second_split(tab[x]);
-				print_tab(ret);
 				new_l->type = *ret[0];
 				new_l->ratio = ft_strtof(ret[1]);
 				vector = split_string(ret[2], ',');
@@ -255,7 +227,6 @@ void	convert_tab(char **tab, t_data *data)
 					close_window(data);
 				}
 				ret = second_split(tab[x]);
-print_tab(ret);
 				vector = split_string(ret[1], ',');
 				if (tab_check(vector) < 0)
 				{
@@ -300,7 +271,6 @@ print_tab(ret);
 					close_window(data);
 				}
 				ret = second_split(tab[x]);
-print_tab(ret);
 				new_l->type = *ret[0];
 				vector = split_string(ret[1], ',');
 				if (tab_check(vector) < 0)
@@ -353,7 +323,6 @@ print_tab(ret);
 					close_window(data);
 				}
 				ret = second_split(tab[x]);
-				print_tab(ret);
 				new_f->type = 'S';
 				vector = split_string(ret[1], ',');
 				if (tab_check(vector) < 0)
@@ -406,7 +375,6 @@ print_tab(ret);
 					close_window(data);
 				}
 				ret = second_split(tab[x]);
-print_tab(ret);
 				new_f->type = 'P';
 				vector = split_string(ret[1], ',');
 				if (tab_check(vector) < 0)
@@ -471,7 +439,6 @@ print_tab(ret);
 					close_window(data);
 				}
 				ret = second_split(tab[x]);
-print_tab(ret);
 				new_f->type = 'C';
 				vector = split_string(ret[1], ',');
 				if (tab_check(vector) < 0)
