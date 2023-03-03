@@ -6,7 +6,7 @@
 /*   By: nnemeth <nnemeth@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 16:19:00 by nikki             #+#    #+#             */
-/*   Updated: 2023/02/24 16:09:10 by nnemeth          ###   ########.fr       */
+/*   Updated: 2023/03/02 17:12:50 by nnemeth          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,11 @@ int	color2(double r, double g, double b)
 int	ray_color(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
+}
+
+void	init_t(t_rays *ray)
+{
+	ray->t = 1E99;
+	ray->t1 = 100000;
+	ray->t2 = 100000;
 }

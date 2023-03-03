@@ -33,9 +33,9 @@ t_light	*init_light(void)
 	if (!light)
 		return (NULL);
 	light->id = 0;
-	light->color.x = 0.0;
-	light->color.y = 0.0;
-	light->color.z = 0.0;
+	light->color.x = 255;
+	light->color.y = 255;
+	light->color.z = 255;
 	light->coord.x = 0.0f;
 	light->coord.y = 0.0f;
 	light->coord.z = 0.0f;

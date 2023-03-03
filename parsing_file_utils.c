@@ -40,7 +40,7 @@ int	ft_stoi(char *str)
 	return (sign * result);
 }
 
-float	ft_strtof(const char* str)
+float	ft_strtof(const char *str)
 {
 	float	result;
 	int		is_negative;
@@ -85,7 +85,7 @@ float	ft_strtof(const char* str)
 	return (result);
 }
 
-int ft_strinstr(const char *str, const char *substr)
+int	ft_strinstr(const char *str, const char *substr)
 {
 	int	i;
 	int	j;
@@ -113,7 +113,7 @@ int ft_strinstr(const char *str, const char *substr)
 	return (0);
 }
 
-int	contains_alpha(char* str)
+int	contains_alpha(char *str)
 {
 	int	i;
 
@@ -127,117 +127,4 @@ int	contains_alpha(char* str)
 		i++;
 	}
 	return (0);
-}
-
-void	free_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	if (tab == NULL)
-		return ;
-	while (tab[i])
-	{
-		free(tab[i]);
-		++i;
-	}
-	free(tab);
-}
-
-int	ft_isspace(int c)
-{
-	return ((c == ' ') || (c >= '\t' && c <= '\r'));
-}
-
-t_light	*last_light(t_data *data)
-{
-	t_light *curr;
-
-	curr = data->light;
-	if (curr == NULL)
-		return (NULL);
-	while (curr->next)
-		curr = curr->next;
-	return (curr);
-}
-
-t_form	*last_obj(t_data *data)
-{
-	t_form *curr;
-
-	curr = data->object;
-	if (curr == NULL)
-		return (NULL);
-	while (curr->next)
-		curr = curr->next;
-	return (curr);
-}
-
-char *ft_strncpy_rt(char *dest, const char *src, size_t n)
-{
-	size_t i = 0;
-	while (i < n && src[i] != '\0')
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	while (i < n)
-	{
-		dest[i] = '\0';
-		i++;
-	}
-	return (dest);
-}
-
-
-void *ft_realloc_rt(void *ptr, size_t size)
-{
-	void *new_ptr;
-	size_t old_size;
-
-	if (size == 0)
-	{
-		free(ptr);
-		return NULL;
-	}
-	if (ptr == NULL)
-	{
-		new_ptr = malloc(size);
-		return new_ptr;
-	}
-	old_size = ft_strlen(ptr);
-	new_ptr = malloc(size);
-	if (new_ptr == NULL)
-	{
-		return NULL;
-	}
-	ft_memcpy(new_ptr, ptr, old_size < size ? old_size : size);
-	free(ptr);
-
-	return (new_ptr);
-}
-
-void *ft_realloc_rt_tab(void *ptr, size_t size)
-{
-	void *new_ptr;
-
-	if (size == 0)
-	{
-		free(ptr);
-		return NULL;
-	}
-	if (ptr == NULL)
-	{
-		new_ptr = malloc(size);
-		return new_ptr;
-	}
-	new_ptr = malloc(size);
-	if (new_ptr == NULL)
-	{
-		return NULL;
-	}
-	ft_memcpy(new_ptr, ptr, size);
-	free(ptr);
-
-	return (new_ptr);
 }

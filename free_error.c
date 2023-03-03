@@ -1,32 +1,31 @@
-
 #include "MiniRT.h"
-
 
 int	does_it_segf(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
-
-	while(str[i])
+	while (str[i])
 	{
 		if (ft_isspace(str[i]))
 		{
 			i++;
-			continue;	
+			continue ;
 		}
 		if (str[i] <= '9' && str[i] >= '0')
 		{
 			i++;
-			continue;
+			continue ;
 		}
-		if (str[i] == 'A' || str[i] == 's' || str[i] == 'p' || str[i] == 'C' || str[i] == 'c' 
-			|| str[i] == 'y' || str[i] == 'L' || str[i] == 'P' || str[i] == 'l' || str[i] == '-' || str[i] == '.' || str[i] == ',' )
+		if (str[i] == 'A' || str[i] == 's' || str[i] == 'p' || str[i] == 'C'
+			|| str[i] == 'c' || str[i] == 'y' || str[i] == 'L' || str[i] == 'P'
+			|| str[i] == 'l' || str[i] == '-' || str[i] == '.'
+			|| str[i] == ',')
 		{
 			i++;
 			continue ;
 		}
-		if (str[i] == '\0' || str[i] ==  '\n')
+		if (str[i] == '\0' || str[i] == '\n')
 			return (0);
 		printf("This line seems wrong : \n%s, wrong char: %c\n", str, str[i]);
 		return (-1);
@@ -36,11 +35,10 @@ int	does_it_segf(char *str)
 
 int	tab_check(char **tab)
 {
-	int i;
+	int	i;
 
 	i = 0;
-
-	while(tab[i])
+	while (tab[i])
 		i++;
 	if (i != 3)
 	{
@@ -52,13 +50,11 @@ int	tab_check(char **tab)
 
 int	tab_check_rgb(char **tab)
 {
-	int i;
+	int	i;
 
 	i = 0;
-
-	while(tab[i])
+	while (tab[i])
 	{
-		
 		if (ft_stoi(tab[i]) > 255 || ft_stoi(tab[i]) < 0)
 		{
 			printf("rgb value are not in range (0-255)\n");

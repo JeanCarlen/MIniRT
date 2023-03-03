@@ -14,31 +14,21 @@
 
 void	load_scene(t_data *data)
 {
-
 	data->mlx.win_i = 0;
-	// data->light->light_dir.x = 0;
-	// data->light->light_dir.y = 0;
-	// data->light->light_dir.z = -1;
 	while (data->mlx.win_i < H)
 	{
 		data->mlx.win_y = 0;
 		while (data->mlx.win_y < W)
 		{
-			
 			set_scene(data);
 			data->rays.hit_id = 0;
-			// data->rays.n = add_values(150, 0, 10);
 			if (routine_inter(data, &(data->rays)))
 			{
 				data->rays.n = get_light(data);
-				my_mlx_pixel_put(data, data->mlx.win_y, (H - data->mlx.win_i - 1),
-					color(ft_max(data->rays.n.x),
+				my_mlx_pixel_put(data, data->mlx.win_y,
+					(H - data->mlx.win_i - 1), color(ft_max(data->rays.n.x),
 						ft_max(data->rays.n.y), ft_max(data->rays.n.z)));
 			}
-			// my_mlx_pixel_put(rays, data->mlx.win_y, (H - data->mlx.win_i - 1),
-			// 	color((ft_max(rays->light.intens_s   pixel.x)),
-			// 		(ft_max(rays->light.intens_pixel.y)),
-			// 		(ft_max(rays->light.intens_pixel.z))));
 			data->mlx.win_y++;
 		}
 		data->mlx.win_i++;
@@ -62,14 +52,13 @@ t_vector	get_light(t_data *data)
 {
 	double		dot_light;
 	t_vector	minus_tmp;
-	t_rays		ray_light;
 	int			shadow;
 	t_light		*c_light;
+	t_rays		ray_light;
 
 	shadow = FALSE;
 	c_light = data->light;
-	if ( c_light && c_light->type != 'L')
-		c_light = c_light->next;
+	light_details(data, c_light);
 	if (!c_light)
 	{
 		ray_light.n = data->rays.n;
@@ -78,27 +67,29 @@ t_vector	get_light(t_data *data)
 	minus_tmp = minus(c_light->coord, data->rays.p);
 	dot_light = getnorm(minus_tmp);
 	minus_tmp = normalize(minus_tmp);
-	//ray_light.ray_orig = ft_plus(data->rays.p, ft_mult(0.01, data->rays.n));
 	ray_light.ray_dir = minus_tmp;
 	ray_light.ray_orig = data->rays.p;
 	shadow = routine_inter(data, &ray_light);
 	if (shadow && ray_light.t * ray_light.t < dot_light)
-		ray_light.n = add_values(data->rays.n.x * data->light->ratio * (data->light->color.x / 255), \
-				data->rays.n.y * data->light->ratio * (data->light->color.y / 255), \
-				data->rays.n.z * data->light->ratio * (data->light->color.z / 255));
+			ray_light.n = add_values(data->rays.n.x * data->light->ratio
+				* (data->light->color.x / 255), data->rays.n.y
+				* data->light->ratio * (data->light->color.y / 255),
+				data->rays.n.z * data->light->ratio
+				* (data->light->color.z / 255));
 	else
 		ray_light.n = data->rays.n;
-	// rays->light.intens_pixel = ft_mult((rays->light.l_bright \
-	// 	* ft_max(dot(minus_tmp, rays->light.n)) / dot_light), rays->light.albedo);
-	// rays->light.intens_pixel = normalize(rays->light.intens_pixel);
-	// rays->light.intens_pixel = ft_mult_vec(rays->light.albedo, rays->light.intens_pixel);
-	//add_amb(data, &ray_light);
 	return (ray_light.n);
 }
 
-/* 
-1) create a new ray from the surface to the light]
-2) check if the ray intersects with any object
-3) if there is an intersection, and the t2 is less than dot light, there is a shade
-4) send a black pixel 
+void	light_details(t_data *data, t_light *c_light)
+{
+	c_light = data->light;
+	if (c_light && c_light->type != 'L')
+		c_light = c_light->next;
+}
+/*
+	//ray_light.ray_orig = ft_plus(data->rays.p, ft_mult(0.01, data->rays.n));
+	// rays->light.intens_pixel = ft_mult((rays->light.l_bright \
+	// 	* ft_max(dot(minus_tmp, rays->light.n)) / dot_light), rays->light.albedo);
+	//add_amb(data, &ray_light);
 */

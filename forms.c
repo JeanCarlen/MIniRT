@@ -1,21 +1,14 @@
+#include "MiniRT.h"
 
-	##################################SPHERE##################################
-/*
-void	sphere(char *str)
+void	sphere(char *str, int x, t_data *data)
 {
 	t_form	*new_f;
 	t_form	*last;
 	new_f = init_form();
 	new_f->id = (x+1);
-	if (does_it_segf(tab[x]) < 0)
-	{
-		if (ret)
-			free_tab(ret);
-		if (vector)
-			free_tab(vector);
+	if (does_it_segf(str) < 0)
 		close_window(data);
-	}
-	sphere_2(tab[x], new_f);
+	sphere_2(str, new_f, data);
 	if (data->object == NULL)
 		data->object = new_f;
 	else
@@ -23,39 +16,32 @@ void	sphere(char *str)
 		last = last_obj(data);
 		last->next = new_f;
 	}
-	free_tab(ret);	
 }
 
-void	sphere_2(char *str, t_form *new_f)
+void	sphere_2(char *str, t_form *new_f, t_data *data)
 {
-	char **ret;
+	char **ret = NULL;
+	char **vector = NULL;
 
 	ret = second_split(str);
 	new_f->type = 'S';
 	vector = split_string(ret[1], ',');
-	put_coord_form(vector, new_f);
+	put_coord_form(vector, new_f, data);
 	new_f->sphere_rad = (ft_strtof(ret[2]) / 2);
 	vector = split_string(ret[3], ',');
-	put_color_form(vector, new_f);
+	put_color_form(vector, new_f, data);
 }
 
-			##################################PLAN##################################
-/*
-void	plan(char *str)
+void	plan(char *str, int x, t_data *data)
 {
 	t_form	*new_f;
 	t_form	*last;
 	new_f = init_form();
 	new_f->id = (x+1);
-	if (does_it_segf(tab[x]) < 0)
-	{
-		if (ret)
-			free_tab(ret);
-		if (vector)
-			free_tab(vector);
+
+	if (does_it_segf(str) < 0)
 		close_window(data);
-	}
-	plan_2(tab[x], new_f);
+	plan_2(str, new_f, data);
 	if (data->object == NULL)
 		data->object = new_f;
 	else
@@ -63,43 +49,33 @@ void	plan(char *str)
 		last = last_obj(data);
 		last->next = new_f;
 	}
-	free_tab(ret);
 }
 
-void plan_2(char *str, t_form *new_f)
+void plan_2(char *str, t_form *new_f, t_data *data)
 {
 	char **ret;
+	char **vector;
 
 	ret = second_split(str);
 	new_f->type = 'P';
 	vector = split_string(ret[1], ',');
-	put_coord_form(vector, new_f);
+	put_coord_form(vector, new_f, data);
 	vector = split_string(ret[2], ',');
-	put_orient_form(vector, new_f);
+	put_orient_form(vector, new_f, data);
 	vector = split_string(ret[3], ',');
-	put_color_form(vector, new_f);
+	put_color_form(vector, new_f, data);
 }
 
-
-
-
-##################################CYLINDRE##################################
-/*
-void cylindre(char *str)
+void cylindre(char *str, int x, t_data *data)
 {
 	t_form	*new_f;
 	t_form	*last;
 	new_f = init_form();
 	
-	if (does_it_segf(tab[x]) < 0)
-	{
-		if (ret)
-			free_tab(ret);
-		if (vector)
-			free_tab(vector);
+	new_f->id = (x+1);
+	if (does_it_segf(str) < 0)
 		close_window(data);
-	}
-	cylindre_2(tab[x], new_f);
+	cylindre_2(str, new_f, data);
 	if (data->object == NULL)
 		data->object = new_f;
 	else
@@ -109,28 +85,30 @@ void cylindre(char *str)
 	}
 }
 
-void cylindre_2(char *str, t_form *new_f)
+void cylindre_2(char *str, t_form *new_f, t_data *data)
 {
-	char **ret;
+	char	**ret;
+	char	**vector;
 
 	ret = second_split(str);
 	new_f->type = 'C';
 	vector = split_string(ret[1], ',');
-	put_coord_form(vector, new_f);
+	put_coord_form(vector, new_f, data);
 	vector = split_string(ret[2], ',');
-	put_orient_form(vector, new_f);
+	put_orient_form(vector, new_f, data);
 	new_f->cyl_dia = ft_strtof(ret[3]);
 	new_f->cyl_height = ft_strtof(ret[4]);
 	vector = split_string(ret[5], ',');
-	put_color_form(vector, new_f);
+	put_color_form(vector, new_f, data);
 	free_tab(ret);
 }
 
-##################################Put_cam##################################
-
-void	cam(char *str)
+void	cam(char *str, t_data *data)
 {
-	if (does_it_segf(tab[x]) < 0)
+	char	**ret = NULL;
+	char	**vector = NULL;
+
+	if (does_it_segf(str) < 0)
 	{
 		if (ret)
 			free_tab(ret);
@@ -138,12 +116,33 @@ void	cam(char *str)
 			free_tab(vector);
 		close_window(data);
 	}
-	ret = second_split(tab[x]);
+	ret = second_split(str);
 	vector = split_string(ret[1], ',');
+	put_coord_cam(vector, data);
+	vector = split_string(ret[2], ',');
+	put_coord_cam(vector, data);
+	data->camera.fov = ft_stoi(ret[3]);
+	free_tab(ret);
+}
+
+void put_orient_cam(char **vector, t_data *data)
+{
 	if (tab_check(vector) < 0)
 	{
-		if (ret)
-			free_tab(ret);
+		if (vector)
+			free_tab(vector);
+		close_window(data);
+	}	
+	data->camera.orient.x = ft_strtof(vector[0]);
+	data->camera.orient.y = ft_strtof(vector[1]);
+	data->camera.orient.z = ft_strtof(vector[2]);
+	free_tab(vector);
+}
+
+void put_coord_cam(char **vector, t_data *data)
+{
+	if (tab_check(vector) < 0)
+	{
 		if (vector)
 			free_tab(vector);
 		close_window(data);
@@ -152,32 +151,17 @@ void	cam(char *str)
 	data->camera.pos.y = ft_strtof(vector[1]);
 	data->camera.pos.z = ft_strtof(vector[2]);
 	free_tab(vector);
-	vector = split_string(ret[2], ',');
-	if (tab_check(vector) < 0)
-	{
-		if (ret)
-			free_tab(ret);
-		if (vector)
-			free_tab(vector);
-		close_window(data);
-	}	
-	data->camera.orient.x = ft_strtof(vector[0]);
-	data->camera.orient.y = ft_strtof(vector[0]);
-	data->camera.orient.z = ft_strtof(vector[0]);
-	data->camera.fov = ft_stoi(ret[3]);
-	free_tab(vector);
-	free_tab(ret);
 }
 
-##################################Put_AMB##################################
-
-void	ambiant(char *str)
+void	ambiant(char *str, t_data *data)
 {
 	t_light	*new_l;
 	t_light	*last;
 	new_l = init_light();
+	char **ret = NULL;
+	char **vector = NULL;
 
-	if (does_it_segf(tab[x]) < 0)
+	if (does_it_segf(str) < 0)
 	{
 		if (ret)
 			free_tab(ret);
@@ -185,11 +169,11 @@ void	ambiant(char *str)
 			free_tab(vector);
 		close_window(data);
 	}
-	ret = second_split(tab[x]);
+	ret = second_split(str);
 	new_l->type = *ret[0];
 	new_l->ratio = ft_strtof(ret[1]);
 	vector = split_string(ret[2], ',');
-	put_color_light(vector, new_l);
+	put_color_light(vector, new_l, data);
 	if (data->light == NULL)
 		data->light = new_l;
 	else
@@ -197,18 +181,47 @@ void	ambiant(char *str)
 		last = last_light(data);
 		last->next = new_l;
 	}
-	free_tab(vector);
 	free_tab(ret);
 }
 
-##################################Put_form##################################
+void	light(char *str, int x, t_data *data)
+{
+	t_light	*new_l;
+	t_light	*last;
+	new_l = init_light();
 
-void put_color_form(char **tab, t_form *new_f)
+	new_l->id = (x + 1);
+
+	if (does_it_segf(str) < 0)
+		close_window(data);
+	light_2(str, new_l, data);
+	if (data->light == NULL)
+		data->light = new_l;
+	else
+	{
+		last = last_light(data);
+		last->next = new_l;
+	}
+}
+
+void	light_2(char *str, t_light *new_l, t_data *data)
+{
+	char **ret = NULL;
+	char **vector = NULL;
+
+	ret = second_split(str);
+	new_l->type = *ret[0];
+	vector = split_string(ret[1], ',');
+	put_coord_light(vector, new_l, data);
+	new_l->ratio = ft_strtof(ret[2]);
+	vector = split_string(ret[3], ',');
+	put_color_light(vector, new_l, data);
+}
+
+void put_color_form(char **vector, t_form *new_f, t_data *data)
 {
 	if (tab_check_rgb(vector) < 0)
 	{
-		if (ret)
-			free_tab(ret);
 		if (vector)
 			free_tab(vector);
 		close_window(data);;
@@ -219,12 +232,10 @@ void put_color_form(char **tab, t_form *new_f)
 	free_tab(vector);
 }
 
-void put_orient_form(char **tab, t_form *new_f)
+void put_orient_form(char **vector, t_form *new_f, t_data *data)
 {
 	if (tab_check(vector) < 0)
 	{
-		if (ret)
-			free_tab(ret);
 		if (vector)
 			free_tab(vector);
 		close_window(data);
@@ -235,13 +246,10 @@ void put_orient_form(char **tab, t_form *new_f)
 	free_tab(vector);
 }
 
-void put_coord_form(char **tab, t_form *new_f)
+void put_coord_form(char **vector, t_form *new_f, t_data *data)
 {
-	new_f->id = (x+1);
 	if (tab_check(vector) < 0)
 	{
-		if (ret)
-			free_tab(ret);
 		if (vector)
 			free_tab(vector);
 		close_window(data);
@@ -252,12 +260,10 @@ void put_coord_form(char **tab, t_form *new_f)
 	free_tab(vector);
 }
 
-void put_color_light(char **tab, t_light *new_l)
+void put_color_light(char **vector, t_light *new_l, t_data *data)
 {
 	if (tab_check_rgb(vector) < 0)
 	{
-		if (ret)
-			free_tab(ret);
 		if (vector)
 			free_tab(vector);
 		close_window(data);;
@@ -268,29 +274,10 @@ void put_color_light(char **tab, t_light *new_l)
 	free_tab(vector);
 }
 
-void put_orient_light(char **tab, t_light *new_l)
+void put_coord_light(char **vector, t_light *new_l, t_data *data)
 {
 	if (tab_check(vector) < 0)
 	{
-		if (ret)
-			free_tab(ret);
-		if (vector)
-			free_tab(vector);
-		close_window(data);
-	}	
-	new_l->orient.x = ft_strtof(vector[0]);
-	new_l->orient.y = ft_strtof(vector[1]);
-	new_l->orient.z = ft_strtof(vector[2]);
-	free_tab(vector);
-}
-
-void put_coord_light(char **tab, t_light *new_l)
-{
-	new_l->id = (x+1);
-	if (tab_check(vector) < 0)
-	{
-		if (ret)
-			free_tab(ret);
 		if (vector)
 			free_tab(vector);
 		close_window(data);
@@ -300,4 +287,3 @@ void put_coord_light(char **tab, t_light *new_l)
 	new_l->coord.z = ft_strtof(vector[2]);
 	free_tab(vector);
 }
-*/
