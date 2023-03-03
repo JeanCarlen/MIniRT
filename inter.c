@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inter.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnemeth <nnemeth@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:21:40 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/02 17:15:10 by nnemeth          ###   ########.fr       */
+/*   Updated: 2023/03/03 16:54:04 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	inter_cylinder(t_data *data, t_form *current, t_rays *ray)
 	t_tmp = ray->t;
 	if (ray->t2 > ray->t)
 		return (FALSE);
-	if (ray->t2 > 0)
+	if (ray->t2 > 0 && ray->t2 < ray->t1)
 		ray->t = ray->t2;
 	else if (ray->t1 > 0)
 		ray->t = ray->t1;
@@ -75,7 +75,7 @@ int	inter_cylinder(t_data *data, t_form *current, t_rays *ray)
 	// 	ray->n = current->orient;
 	c_light->light_dir = normalize(c_light->light_dir);
 	d = (dot(ray->n, ft_mult(-1, c_light->light_dir)));
-	ray->n = ft_mult(d, current->color);
+	ray->col = ft_mult(d, current->color);
 	ray->hit_id = current->id;
 	return (TRUE);
 }
@@ -91,11 +91,11 @@ int	routine_inter(t_data *data, t_rays *ray)
 	curr = data->object;
 	while (curr)
 	{
-		if (data->rays.hit_id == curr->id)
-		{
-			curr = curr->next;
-			continue ;
-		}
+		// if (data->rays.hit_id == curr->id)
+		// {
+		// 	curr = curr->next;
+		// 	continue ;
+		// }
 		if (curr->type == 'S')
 			if (inter_sphere(data, curr, ray))
 				hit = TRUE;

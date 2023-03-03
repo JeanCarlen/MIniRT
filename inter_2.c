@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inter_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnemeth <nnemeth@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:14:38 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/02 17:15:08 by nnemeth          ###   ########.fr       */
+/*   Updated: 2023/03/03 16:13:02 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ int	inter_sphere(t_data *data, t_form *current, t_rays *ray)
 		return (FALSE);
 	ray->t1 = (-b + sqrt(delta)) / (2 * a);
 	ray->t2 = (-b - sqrt(delta)) / (2 * a);
-	if (ray->t2 > ray->t)
+	if (ray->t2 > ray->t && ray->t1 > ray->t)
 		return (FALSE);
-	if (ray->t1 < 0)
-		return (FALSE);
-	if (ray->t2 > 0)
+	if (ray->t2 > 0 && ray->t2 < ray->t1)
 		ray->t = ray->t2;
-	else
+	else if (ray->t1 > 0)
 		ray->t = ray->t1;
+	else
+		return(FALSE);
 	hit_point(data, current, ray);
 	return (TRUE);
 }
@@ -58,7 +58,7 @@ int	hit_point(t_data *data, t_form *current, t_rays *ray)
 	ray->n = normalize((minus(ray->p, current->coord)));
 	c_light->light_dir = normalize(c_light->light_dir);
 	d = (dot(ray->n, ft_mult(-1, c_light->light_dir)));
-	ray->n = ft_mult(d, current->color);
+	ray->col = ft_mult(d, current->color);
 	return (TRUE);
 }
 
@@ -101,7 +101,7 @@ int	plane_found(t_data *data, t_form *current, t_rays *ray)
 	ray->n = current->orient;
 	c_light->light_dir = normalize(minus(ray->p, c_light->coord));
 	d = (dot(ray->n, ft_mult(-1, c_light->light_dir)));
-	ray->n = ft_mult(d, current->color);
+	ray->col = ft_mult(d, current->color);
 	ray->hit_id = current->id;
 	return (TRUE);
 }
