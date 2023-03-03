@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MiniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nnemeth <nnemeth@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/03/02 18:14:26 by nnemeth          ###   ########.fr       */
+/*   Updated: 2023/03/03 16:35:41 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <fcntl.h>
 # include <ctype.h>
 # include "minilibx/mlx.h"
-# include "Libft/libft.h"
+# include "libft/libft.h"
 
 # define BUFFER_SIZE 42
 # define KEY_ESC 53
@@ -103,6 +103,7 @@ typedef struct s_rays
 	t_vector	ray_orig;
 	t_vector	p;
 	t_vector	n;
+	t_vector	col;
 	int			hit_id;
 }	t_rays;
 
@@ -139,7 +140,7 @@ int			plane_found(t_data *data, t_form *current, t_rays *ray);
 /*launch*/
 void		load_scene(t_data *data);
 t_vector	get_light(t_data *data);
-void	light_details(t_data *data, t_light *c_light);
+t_light		*light_details(t_data *data, t_light *c_light);
 
 /*parsing_file_utils*/
 void		print_tab(char **tab); //print a tab

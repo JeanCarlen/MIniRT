@@ -24,10 +24,11 @@ void	load_scene(t_data *data)
 			data->rays.hit_id = 0;
 			if (routine_inter(data, &(data->rays)))
 			{
-				data->rays.n = get_light(data);
+				data->rays.col = get_light(data);
+				// data->rays.col = add_amb(data, &data->rays);
 				my_mlx_pixel_put(data, data->mlx.win_y,
-					(H - data->mlx.win_i - 1), color(ft_max(data->rays.n.x),
-						ft_max(data->rays.n.y), ft_max(data->rays.n.z)));
+					(H - data->mlx.win_i - 1), color(ft_max(data->rays.col.x),
+						ft_max(data->rays.col.y), ft_max(data->rays.col.z)));
 			}
 			data->mlx.win_y++;
 		}
@@ -39,13 +40,13 @@ void	load_scene(t_data *data)
 
 t_vector	add_amb(t_data *data, t_rays *ray)
 {
-	ray->n.x += (data->light->color.x \
+	ray->col.x *= (data->light->color.x \
 	* data->light->ratio);
-	ray->n.y += (data->light->color.y \
+	ray->col.y *= (data->light->color.y \
 	* data->light->ratio);
-	ray->n.z += (data->light->color.z \
+	ray->col.z *= (data->light->color.z \
 	* data->light->ratio);
-	return (ray->n);
+	return (ray->col);
 }
 
 t_vector	get_light(t_data *data)
@@ -58,34 +59,36 @@ t_vector	get_light(t_data *data)
 
 	shadow = FALSE;
 	c_light = data->light;
-	light_details(data, c_light);
+	c_light = light_details(data, c_light);
 	if (!c_light)
 	{
-		ray_light.n = data->rays.n;
+		ray_light.n = data->rays.col;
 		return (ray_light.n);
 	}
 	minus_tmp = minus(c_light->coord, data->rays.p);
 	dot_light = getnorm(minus_tmp);
 	minus_tmp = normalize(minus_tmp);
 	ray_light.ray_dir = minus_tmp;
-	ray_light.ray_orig = data->rays.p;
+	ray_light.ray_orig = ft_plus(data->rays.p, ft_mult(0.01, data->rays.n));
+	// ray_light.ray_orig = data->rays.p;
 	shadow = routine_inter(data, &ray_light);
 	if (shadow && ray_light.t * ray_light.t < dot_light)
-			ray_light.n = add_values(data->rays.n.x * data->light->ratio
-				* (data->light->color.x / 255), data->rays.n.y
+			ray_light.col = add_values(data->rays.col.x * data->light->ratio
+				* (data->light->color.x / 255), data->rays.col.y
 				* data->light->ratio * (data->light->color.y / 255),
-				data->rays.n.z * data->light->ratio
+				data->rays.col.z * data->light->ratio
 				* (data->light->color.z / 255));
 	else
-		ray_light.n = data->rays.n;
-	return (ray_light.n);
+		ray_light.col = data->rays.col;
+	return (ray_light.col);
 }
 
-void	light_details(t_data *data, t_light *c_light)
+t_light	*light_details(t_data *data, t_light *c_light)
 {
 	c_light = data->light;
 	if (c_light && c_light->type != 'L')
 		c_light = c_light->next;
+	return (c_light);
 }
 /*
 	//ray_light.ray_orig = ft_plus(data->rays.p, ft_mult(0.01, data->rays.n));
