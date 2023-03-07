@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MiniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeancarlen <jeancarlen@student.42.fr>      +#+  +:+       +#+        */
+/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:42 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/06 15:05:41 by jeancarlen       ###   ########.fr       */
+/*   Updated: 2023/03/07 16:56:08 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,10 +232,8 @@ void		free_light(t_data *data);
 
 /*TO DO*/
 /*
-ajouter caps au cylindres
 shadows --ISH --ish
 passer lumière ambiante a la place de data->light...
-plusieurs lumières
 orientation de la camera (big step small step)
 dividing big function
 error

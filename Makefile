@@ -6,7 +6,7 @@
 #    By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 12:41:46 by nnemeth           #+#    #+#              #
-#    Updated: 2023/03/07 16:05:21 by fmalizia         ###   ########.ch        #
+#    Updated: 2023/03/07 16:06:19 by fmalizia         ###   ########.ch        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,12 +34,12 @@ LMLX		= -L ${MLXPATH} -lmlx
 
 GR	= \033[32;1m
 RC	= \033[0m
-BG = \033[42m
+BG	= \033[42m
 
 all:	start ${NAME}
 .c.o:
 				@${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
-				@printf "$(BG)  $(RC)"
+				@printf "$(BG) $(RC)"
 
 $(NAME): ${OBJS}
 		@printf "\n"
