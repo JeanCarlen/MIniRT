@@ -70,7 +70,6 @@ t_vector	get_light(t_data *data)
 	minus_tmp = normalize(minus_tmp);
 	ray_light.ray_dir = minus_tmp;
 	ray_light.ray_orig = ft_plus(data->rays.p, ft_mult(0.01, data->rays.n));
-	// ray_light.ray_orig = data->rays.p;
 	shadow = routine_inter(data, &ray_light);
 	if (shadow && ray_light.t * ray_light.t < dot_light)
 			ray_light.col = add_values(data->rays.col.x * data->light->ratio
