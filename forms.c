@@ -30,6 +30,7 @@ void	sphere_2(char *str, t_form *new_f, t_data *data)
 	new_f->sphere_rad = (ft_strtof(ret[2]) / 2);
 	vector = split_string(ret[3], ',');
 	put_color_form(vector, new_f, data);
+	free_tab(ret);
 }
 
 void	plan(char *str, int x, t_data *data)
@@ -64,6 +65,7 @@ void plan_2(char *str, t_form *new_f, t_data *data)
 	put_orient_form(vector, new_f, data);
 	vector = split_string(ret[3], ',');
 	put_color_form(vector, new_f, data);
+	free_tab(ret);
 }
 
 void cylindre(char *str, int x, t_data *data)
@@ -158,22 +160,10 @@ void	ambiant(char *str, t_data *data)
 	t_light	*new_l;
 	t_light	*last;
 	new_l = init_light();
-	char **ret = NULL;
-	char **vector = NULL;
 
 	if (does_it_segf(str) < 0)
-	{
-		if (ret)
-			free_tab(ret);
-		if (vector)
-			free_tab(vector);
 		close_window(data);
-	}
-	ret = second_split(str);
-	new_l->type = *ret[0];
-	new_l->ratio = ft_strtof(ret[1]);
-	vector = split_string(ret[2], ',');
-	put_color_light(vector, new_l, data);
+	ambiant_2(str, new_l, data);
 	if (data->light == NULL)
 		data->light = new_l;
 	else
@@ -181,6 +171,18 @@ void	ambiant(char *str, t_data *data)
 		last = last_light(data);
 		last->next = new_l;
 	}
+}
+
+void	ambiant_2(char *str, t_light *new_l, t_data *data)
+{
+	char **ret = NULL;
+	char **vector = NULL;
+
+	ret = second_split(str);
+	new_l->type = *ret[0];
+	new_l->ratio = ft_strtof(ret[1]);
+	vector = split_string(ret[2], ',');
+	put_color_light(vector, new_l, data);
 	free_tab(ret);
 }
 
@@ -216,6 +218,7 @@ void	light_2(char *str, t_light *new_l, t_data *data)
 	new_l->ratio = ft_strtof(ret[2]);
 	vector = split_string(ret[3], ',');
 	put_color_light(vector, new_l, data);
+	free_tab(ret);
 }
 
 void put_color_form(char **vector, t_form *new_f, t_data *data)

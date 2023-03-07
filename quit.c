@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcarlen <jcarlen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jeancarlen <jeancarlen@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:35:23 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/02 15:16:25 by jcarlen          ###   ########.ch       */
+/*   Updated: 2023/03/06 18:43:39 by jeancarlen       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	close_window(t_data *data)
 {
 	free_struc(data);
 	free_light(data);
+	mlx_destroy_image(data->mlx.mlx_ptr, data->mlx.img);
 	free(data);
 	data = NULL;
 	exit(0);

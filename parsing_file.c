@@ -161,10 +161,6 @@ char	**second_split(char *str)
 void	convert_tab(char **tab, t_data *data)
 {
 	int		x;
-	char	**ret;
-	char	**vector;
-	vector = NULL;
-	ret = NULL;
 	x = 0;
 	print_tab(tab);
 	while (tab[x])

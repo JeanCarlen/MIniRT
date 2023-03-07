@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inter.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jeancarlen <jeancarlen@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:21:40 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/03 16:54:04 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/06 18:08:56 by jeancarlen       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,11 +91,6 @@ int	routine_inter(t_data *data, t_rays *ray)
 	curr = data->object;
 	while (curr)
 	{
-		// if (data->rays.hit_id == curr->id)
-		// {
-		// 	curr = curr->next;
-		// 	continue ;
-		// }
 		if (curr->type == 'S')
 			if (inter_sphere(data, curr, ray))
 				hit = TRUE;

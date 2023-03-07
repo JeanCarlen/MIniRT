@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inter_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jeancarlen <jeancarlen@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:14:38 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/03 16:13:02 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/06 18:19:23 by jeancarlen       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ int	plane_found(t_data *data, t_form *current, t_rays *ray)
 	ray->n = current->orient;
 	c_light->light_dir = normalize(minus(ray->p, c_light->coord));
 	d = (dot(ray->n, ft_mult(-1, c_light->light_dir)));
+	if (d < 0)
+		d *= -1;
 	ray->col = ft_mult(d, current->color);
 	ray->hit_id = current->id;
 	return (TRUE);

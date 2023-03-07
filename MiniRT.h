@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MiniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jcarlen <jcarlen@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jeancarlen <jeancarlen@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:42 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/03 17:03:06 by jcarlen          ###   ########.ch       */
+/*   Updated: 2023/03/06 15:05:41 by jeancarlen       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,7 @@ void		cam(char *str, t_data *data);
 void		put_orient_cam(char **vector, t_data *data);
 void		put_coord_cam(char **vector, t_data *data);
 void		ambiant(char *str, t_data *data);
+void		ambiant_2(char *str, t_light *new_l, t_data *data);
 void		light(char *str, int x, t_data *data);
 void		light_2(char *str, t_light *new_l, t_data *data);
 void		put_color_form(char **vector, t_form *new_f, t_data *data);
