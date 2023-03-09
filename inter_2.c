@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:14:38 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/07 16:55:00 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/08 12:00:06 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,11 @@ int	hit_point(t_data *data, t_form *current, t_rays *ray)
 	d = (dot(ray->n, ft_mult(-1, c_light->light_dir)));
 	ray->col = ft_mult(d, current->color);
 	//ray->col = add_values(a_light->color.x, a_light->color.y, a_light->color.z);
-	ray->col = add_values(ray->col.x * a_light->ratio
-		* (a_light->color.x / 255) / d, ray->col.y
-		* a_light->ratio * (a_light->color.y / 255) / d,
-		ray->col.z * a_light->ratio
-		* (a_light->color.z / 255) / d);
+	// ray->col = add_values(ray->col.x * a_light->ratio
+	// 	* (a_light->color.x / 255) / d, ray->col.y
+	// 	* a_light->ratio * (a_light->color.y / 255) / d,
+	// 	ray->col.z * a_light->ratio
+	// 	* (a_light->color.z / 255) / d);
 	return (TRUE);
 }
 

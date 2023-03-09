@@ -1,6 +1,7 @@
 {
 	"files.associations": {
 		"iterator": "c",
-		"string.h": "c"
+		"string.h": "c",
+		"bitset": "c"
 	}
 }
