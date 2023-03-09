@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:42 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/08 11:54:46 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/09 16:22:36 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ typedef struct s_cam
 	t_vector		pos;
 	t_vector		orient;
 	float			fov;
+	t_vector		right;
+	t_vector		up;
 }	t_cam;
 
 typedef struct s_light
@@ -218,6 +220,8 @@ void		put_orient_form(char **vector, t_form *new_f, t_data *data);
 void		put_coord_form(char **vector, t_form *new_f, t_data *data);
 void		put_color_light(char **vector, t_light *new_l, t_data *data);
 void		put_coord_light(char **vector, t_light *new_l, t_data *data);
+t_vector	cross(t_vector vect_a, t_vector vect_b);
+void		print_vec(char *str, t_vector v);
 
 /*pas trouvé dans les fichiers*/
 

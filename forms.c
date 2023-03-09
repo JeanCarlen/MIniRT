@@ -122,8 +122,13 @@ void	cam(char *str, t_data *data)
 	vector = split_string(ret[1], ',');
 	put_coord_cam(vector, data);
 	vector = split_string(ret[2], ',');
-	put_coord_cam(vector, data);
+	put_orient_cam(vector, data);
 	data->camera.fov = ft_stoi(ret[3]);
+	data->camera.up = normalize(add_values(0, 1, 0));
+	data->camera.right = cross(data->camera.orient, data->camera.up);
+	print_vec("orient: ", data->camera.orient);
+	print_vec("up: ", data->camera.up);
+	print_vec("right: ", data->camera.right);
 	free_tab(ret);
 }
 

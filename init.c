@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:14:48 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/08 15:33:35 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/09 16:22:42 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,32 @@ void	ft_init_window(t_data *data)
 
 void	set_scene(t_data *data)
 {
-	t_vector	zawaldo;
-	float		ratio;
-	float		v_range;
+	// t_vector	zawaldo;
+	t_vector	temp1;
+	t_vector	temp2;
+	t_vector	new_x;
+	t_vector	new_y;
+	t_vector	new_z;
 	
-	ratio = (float)IMG_WIDTH / (float)IMG_HEIGHT;
-	v_range  = tan(data->camera.fov * 0.5);
 	data->rays.ray_orig.x = data->camera.pos.x;
 	data->rays.ray_orig.y = data->camera.pos.y;
 	data->rays.ray_orig.z = data->camera.pos.z;
-	zawaldo.x = (2 * ((data->mlx.win_y + 0.5) / IMG_WIDTH) - 1)
-		* v_range * ratio;
-	zawaldo.y = (1 - 2 * ((data->mlx.win_i + 0.5) / IMG_HEIGHT))
-		* v_range;
-	zawaldo.z = 1;
-	data->rays->ray_dir =
-	// data->rays.ray_dir.x = ((float)data->mlx.win_y - W / 2);
-	// data->rays.ray_dir.y = ((float)data->mlx.win_i - H / 2);
-	// data->rays.ray_dir.z = -W / (2 * tan(data->camera.fov / 2));
-	// printf("%f %f %f\n", data->rays.ray_dir.x,data->rays.ray_dir.y,data->rays.ray_dir.z);
+	// zawaldo.x = (2 * ((data->mlx.win_y + 0.5) / IMG_WIDTH) - 1)
+	// 	* v_range * ratio;
+	// zawaldo.y = (1 - 2 * ((data->mlx.win_i + 0.5) / IMG_HEIGHT))
+	// 	* v_range;
+	// zawaldo.z = 1;
+	// data->rays->ray_dir =
+	data->rays.ray_dir.x = ((float)data->mlx.win_y - W / 2);
+	data->rays.ray_dir.y = ((float)data->mlx.win_i - H / 2);
+	data->rays.ray_dir.z = W / (2 * tan(data->camera.fov / 2));
+	new_x = ft_mult(data->rays.ray_dir.x, data->camera.right);
+	new_y = ft_mult(data->rays.ray_dir.y, data->camera.up);
+	new_z = ft_mult(data->rays.ray_dir.z, data->camera.orient);
+	temp1 = ft_plus(new_x, new_y);
+	temp2 = ft_plus(temp1, new_z);
+	data->rays.ray_dir = normalize(temp2);
+	// printf("%f %f %f\n", data->camera.right.x,data->camera.right.y,data->camera.right.z);
 }
 
 /*
