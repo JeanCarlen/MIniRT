@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inter.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jeancarlen <jeancarlen@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:21:40 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/07 16:08:44 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/13 17:19:19 by jeancarlen       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,7 @@ int	inter_cylinder(t_data *data, t_form *current, t_rays *ray)
 		ray->t = ray->t1;
 	}
 	vm = ft_mult(m, current->orient);
-	c_light = data->light;
-	if (c_light && c_light->type != 'L')
-		c_light = c_light->next;
+	c_light = get_light_type(data->light, 'L');
 	if (!c_light)
 		return (FALSE);
 	c_light->light_dir = minus(ray->p, c_light->coord);

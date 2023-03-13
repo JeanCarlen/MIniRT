@@ -133,9 +133,9 @@ void	cam(char *str, t_data *data)
 	}
 	data->camera.right = normalize(data->camera.right);
 	data->camera.up = normalize(cross(data->camera.orient, data->camera.right));
-	print_vec("orient: ", data->camera.orient);
-	print_vec("up: ", data->camera.up);
-	print_vec("right: ", data->camera.right);
+	//print_vec("orient: ", data->camera.orient);
+	//print_vec("up: ", data->camera.up);
+	//print_vec("right: ", data->camera.right);
 	free_tab(ret);
 }
 

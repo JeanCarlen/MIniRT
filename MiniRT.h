@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MiniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jeancarlen <jeancarlen@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:42 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/09 16:22:36 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/13 17:19:18 by jeancarlen       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,14 +232,16 @@ char		*ft_strncpy_rt(char *dest, const char *src, size_t n);
 void		*ft_realloc_rt(void *ptr, size_t size);
 void		free_struc(t_data *data);
 void		free_light(t_data *data);
+t_light		*get_light_type(t_light *light, char type);
 
 #endif
 
 /*TO DO*/
 /*
-shadows --ISH --ish
-passer lumière ambiante a la place de data->light...
-orientation de la camera (big step small step)
-dividing big function
+shadows --ISH --Ish --ish
+passer lumière ambiante a la place de data->light... -ISH
+orientation de la camera (big step small step) --finish --ish
+dividing big function remake
 error
+NORMINETTTTTTTTTTTTTTTTTTTTTTTTTE
 */

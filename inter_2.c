@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inter_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jeancarlen <jeancarlen@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:14:38 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/08 12:00:06 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/13 17:19:19 by jeancarlen       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,8 @@ int	hit_point(t_data *data, t_form *current, t_rays *ray)
 	ray->p = (ft_plus((ray->ray_orig), ft_mult(ray->t,
 					ray->ray_dir)));
 	ray->hit_id = current->id;
-	c_light = data->light;
-	a_light = data->light;
-	while (c_light && c_light->type != 'L')
-		c_light = c_light->next;
-	while (a_light && a_light->type != 'A')
-		a_light = a_light->next;
+	c_light = get_light_type(data->light, 'L');
+	a_light = get_light_type(data->light, 'A');
 	if (!c_light || !a_light)
 		return (FALSE);
 	c_light->light_dir = minus(ray->p, c_light->coord);
@@ -101,9 +97,7 @@ int	plane_found(t_data *data, t_form *current, t_rays *ray)
 	float		d;
 	t_light		*c_light;
 
-	c_light = data->light;
-	if (c_light && c_light->type != 'L')
-		c_light = c_light->next;
+	c_light = get_light_type(data->light, 'L');
 	if (!c_light)
 		return (FALSE);
 	ray->p = (ft_plus((ray->ray_orig),

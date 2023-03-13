@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jeancarlen <jeancarlen@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:35:23 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/08 11:57:21 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/13 17:19:19 by jeancarlen       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,14 @@
 
 int	close_window(t_data *data)
 {
+	printf("data struct\n");
 	free_struc(data);
+	printf("data light\n");
 	free_light(data);
-	mlx_destroy_image(data->mlx.mlx_ptr, data->mlx.img);
+	printf("data mlx\n");
+	if (data->mlx.mlx_ptr)
+		mlx_destroy_image(data->mlx.mlx_ptr, data->mlx.img);
+	printf("data all\n");
 	free(data);
 	data = NULL;
 	exit(0);
@@ -25,8 +30,6 @@ int	close_window(t_data *data)
 
 int	escape(int keycode, t_data *data)
 {
-	if (keycode == J_KEY)
-		data->test += 100;
 	if (keycode == DOWN)
 		data->camera.pos.y += 0.5;
 	if (keycode == UP)
@@ -35,13 +38,14 @@ int	escape(int keycode, t_data *data)
 		data->camera.pos.x += 1;
 	if (keycode == LEFT)
 		data->camera.pos.x -= 1;
-	// if (keycode == J_KEY)
-	// 	data->camera.pos.z += 1;
+	if (keycode == J_KEY)
+		data->camera.pos.z += 1;
 	if (keycode == K_KEY)
 		data->camera.pos.z -= 1;
 	if (keycode == KEY_ESC)
 	{
 		close_window(data);
+		// ^o^ is broken ^u^
 	}
 	mlx_destroy_image(data->mlx.mlx_ptr, data->mlx.img);
 	data->mlx.img = mlx_new_image(data->mlx.mlx_ptr, W, H);

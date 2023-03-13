@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jeancarlen <jeancarlen@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 16:14:48 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/09 16:22:42 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/13 16:30:48 by jeancarlen       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,6 @@ void	set_scene(t_data *data)
 	data->rays.ray_orig.x = data->camera.pos.x;
 	data->rays.ray_orig.y = data->camera.pos.y;
 	data->rays.ray_orig.z = data->camera.pos.z;
-	// zawaldo.x = (2 * ((data->mlx.win_y + 0.5) / IMG_WIDTH) - 1)
-	// 	* v_range * ratio;
-	// zawaldo.y = (1 - 2 * ((data->mlx.win_i + 0.5) / IMG_HEIGHT))
-	// 	* v_range;
-	// zawaldo.z = 1;
-	// data->rays->ray_dir =
 	data->rays.ray_dir.x = ((float)data->mlx.win_y - W / 2);
 	data->rays.ray_dir.y = ((float)data->mlx.win_i - H / 2);
 	data->rays.ray_dir.z = W / (2 * tan(data->camera.fov / 2));
@@ -48,7 +42,6 @@ void	set_scene(t_data *data)
 	temp1 = ft_plus(new_x, new_y);
 	temp2 = ft_plus(temp1, new_z);
 	data->rays.ray_dir = normalize(temp2);
-	// printf("%f %f %f\n", data->camera.right.x,data->camera.right.y,data->camera.right.z);
 }
 
 /*

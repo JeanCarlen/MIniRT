@@ -83,7 +83,7 @@ void	free_struc(t_data *data)
 		free(current);
 		current = next;
 	}
-	free(data->object);
+	//free(data->object);
 }
 
 void	free_light(t_data *data)
