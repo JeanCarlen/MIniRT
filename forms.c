@@ -126,6 +126,13 @@ void	cam(char *str, t_data *data)
 	data->camera.fov = ft_stoi(ret[3]);
 	data->camera.up = normalize(add_values(0, 1, 0));
 	data->camera.right = cross(data->camera.orient, data->camera.up);
+	if (getnorm(data->camera.right) == 0.0f)
+	{
+		data->camera.up = normalize(add_values(0, 0, 1));
+		data->camera.right = cross(data->camera.orient, data->camera.up);
+	}
+	data->camera.right = normalize(data->camera.right);
+	data->camera.up = normalize(cross(data->camera.orient, data->camera.right));
 	print_vec("orient: ", data->camera.orient);
 	print_vec("up: ", data->camera.up);
 	print_vec("right: ", data->camera.right);
