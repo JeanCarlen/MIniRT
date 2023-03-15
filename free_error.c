@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:58:15 by fmalizia          #+#    #+#             */
-/*   Updated: 2023/03/15 10:16:04 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/15 10:45:44 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,7 @@ int	does_it_segf(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (ft_isspace(str[i]))
-		{
-			i++;
-			continue ;
-		}
-		if (str[i] <= '9' && str[i] >= '0')
+		if (ft_isspace(str[i]) || (str[i] <= '9' && str[i] >= '0'))
 		{
 			i++;
 			continue ;

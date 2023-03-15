@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 12:21:40 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/15 10:00:27 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/15 10:47:33 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 
 int	inter_cylinder(t_data *data, t_form *current, t_rays *ray)
 {
-	float		a;
-	float		b;
-	float		c;
-	float		delta;
 	float		m;
 	float		d;
 	float		t_tmp;
@@ -25,21 +21,8 @@ int	inter_cylinder(t_data *data, t_form *current, t_rays *ray)
 	t_vector	oc;
 	t_light		*c_light;
 
-	oc = minus(ray->ray_orig, current->coord);
-	current->orient = normalize(current->orient);
-	a = dot(ray->ray_dir, ray->ray_dir)
-		- powf(dot(ray->ray_dir, current->orient), 2);
-	b = 2.0f * (dot(ray->ray_dir, oc) - (dot(ray->ray_dir, \
-		current->orient) * dot(oc, current->orient)));
-	c = dot(oc, oc) - powf(dot(oc, current->orient), 2)
-		- powf(current->cyl_dia / 2, 2);
-	delta = (b * b) - (4 * a * c);
-	if (delta < 0)
-		return (FALSE);
-	ray->t1 = (-b + sqrt(delta)) / (2 * a);
-	ray->t2 = (-b - sqrt(delta)) / (2 * a);
 	t_tmp = ray->t;
-	if (ray->t2 > ray->t)
+	if (get_t_cyl(current, ray, &oc) == FALSE)
 		return (FALSE);
 	if (ray->t2 > 0 && ray->t2 < ray->t1)
 		ray->t = ray->t2;
@@ -77,6 +60,31 @@ int	inter_cylinder(t_data *data, t_form *current, t_rays *ray)
 	return (TRUE);
 }
 /*take light calculation and put it in its own function*/
+
+int	get_t_cyl(t_form *current, t_rays *ray, t_vector *oc)
+{
+	float		a;
+	float		b;
+	float		c;
+	float		delta;
+
+	*oc = minus(ray->ray_orig, current->coord);
+	current->orient = normalize(current->orient);
+	a = dot(ray->ray_dir, ray->ray_dir)
+		- powf(dot(ray->ray_dir, current->orient), 2);
+	b = 2.0f * (dot(ray->ray_dir, *oc) - (dot(ray->ray_dir, \
+		current->orient) * dot(*oc, current->orient)));
+	c = dot(*oc, *oc) - powf(dot(*oc, current->orient), 2) \
+		- powf(current->cyl_dia / 2, 2);
+	delta = (b * b) - (4 * a * c);
+	if (delta < 0)
+		return (FALSE);
+	ray->t1 = (-b + sqrt(delta)) / (2 * a);
+	ray->t2 = (-b - sqrt(delta)) / (2 * a);
+	if (ray->t2 > ray->t)
+		return (FALSE);
+	return (TRUE);
+}
 
 int	routine_inter(t_data *data, t_rays *ray)
 {

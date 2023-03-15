@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:42 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/15 10:09:42 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/15 10:46:29 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,6 +235,7 @@ void		free_light(t_data *data);
 t_light		*get_light_type(t_light *light, char type);
 void		cam2(t_data *data);
 t_vector	get_light2(t_data *data, t_rays	*ray_light, int s, double d_light);
+int			get_t_cyl(t_form *current, t_rays *ray, t_vector *oc);
 
 #endif
 
