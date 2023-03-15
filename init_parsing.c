@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 10:00:01 by fmalizia          #+#    #+#             */
-/*   Updated: 2023/03/15 10:00:05 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/15 11:31:33 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_form	*init_form(void)
 	form->sphere_rad = 0.0f;
 	form->cyl_dia = 0.0f;
 	form->cyl_height = 0.0f;
+	form->m = 0.0f;
 	form->next = NULL;
 	return (form);
 }

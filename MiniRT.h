@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:42 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/15 10:46:29 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/15 14:01:38 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_form
 	float			sphere_rad;
 	float			cyl_dia;
 	float			cyl_height;
+	float			m;
 	struct s_form	*next;
 }	t_form;
 
@@ -236,14 +237,14 @@ t_light		*get_light_type(t_light *light, char type);
 void		cam2(t_data *data);
 t_vector	get_light2(t_data *data, t_rays	*ray_light, int s, double d_light);
 int			get_t_cyl(t_form *current, t_rays *ray, t_vector *oc);
+int			get_t(t_rays *ray);
 
 #endif
 
 /*TO DO*/
 /*
 shadows --ISH --Ish --ish
-passer lumière ambiante a la place de data->light... -ISH
-orientation de la camera (big step small step) --finish --ish
+orientation de la camera (big step small step) --finish --ish -----issssssshhhhh
 dividing big function remake
 error
 NORMINETTTTTTTTTTTTTTTTTTTTTTTTTE

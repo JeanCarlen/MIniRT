@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:14:38 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/15 10:44:43 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/15 13:45:54 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,26 +45,28 @@ int	hit_point(t_data *data, t_form *current, t_rays *ray)
 {
 	t_light		*c_light;
 	t_light		*a_light;
+	t_vector	vm;
 	float		d;
 
-	ray->p = (ft_plus((ray->ray_orig), ft_mult(ray->t,
-					ray->ray_dir)));
+	ray->p = (ft_plus((ray->ray_orig), ft_mult(ray->t, ray->ray_dir)));
 	ray->hit_id = current->id;
 	c_light = get_light_type(data->light, 'L');
 	a_light = get_light_type(data->light, 'A');
 	if (!c_light || !a_light)
 		return (FALSE);
 	c_light->light_dir = minus(ray->p, c_light->coord);
-	ray->n = normalize((minus(ray->p, current->coord)));
+	if (current->type == 'S')
+		ray->n = normalize((minus(ray->p, current->coord)));
+	else if (current->type == 'C')
+	{
+		vm = ft_mult(current->m, current->orient);
+		ray->n = normalize(minus(minus(ray->p, current->coord), vm));
+	}
 	c_light->light_dir = normalize(c_light->light_dir);
 	d = (dot(ray->n, ft_mult(-1, c_light->light_dir)));
+	if (d < 0 && current->type == 'C')
+		d *= -1;
 	ray->col = ft_mult(d, current->color);
-	//ray->col = add_values(a_light->color.x, a_light->color.y, a_light->color.z);
-	// ray->col = add_values(ray->col.x * a_light->ratio
-	// 	* (a_light->color.x / 255) / d, ray->col.y
-	// 	* a_light->ratio * (a_light->color.y / 255) / d,
-	// 	ray->col.z * a_light->ratio
-	// 	* (a_light->color.z / 255) / d);
 	return (TRUE);
 }
 

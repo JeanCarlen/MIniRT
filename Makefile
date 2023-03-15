@@ -6,7 +6,7 @@
 #    By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 12:41:46 by nnemeth           #+#    #+#              #
-#    Updated: 2023/03/07 16:06:19 by fmalizia         ###   ########.ch        #
+#    Updated: 2023/03/15 14:02:51 by fmalizia         ###   ########.ch        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ all:	start ${NAME}
 
 $(NAME): ${OBJS}
 		@printf "\n"
-		@$(MAKE) -s -C ${MLXPATH}
+		@$(MAKE) -C ${MLXPATH}
 		@$(MAKE) -C ./Libft
 		@$(CC) $(CFLAGS) $(FRAMEWORK) $(SRCS) $(LMLX) $(LIB) -o $(NAME)
 

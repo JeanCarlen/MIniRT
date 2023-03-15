@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_file.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/15 13:58:15 by fmalizia          #+#    #+#             */
+/*   Updated: 2023/03/15 13:58:35 by fmalizia         ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "MiniRT.h"
 
 char	*readfile(char *filename)
@@ -52,7 +64,7 @@ char	*readfile(char *filename)
 	return (line);
 }
 
-char **split_string(const char *str, char sep)
+char	**split_string(const char *str, char sep)
 {
 	size_t	count = 0;
 	size_t	i = 0;
@@ -79,7 +91,7 @@ char **split_string(const char *str, char sep)
 		if (str[i] == sep)
 		{
 			i++;
-			continue;
+			continue ;
 		}
 		len = 0;
 		while (str[i + len] != sep && str[i + len] != '\0')
@@ -105,7 +117,6 @@ char **split_string(const char *str, char sep)
 	result[j] = NULL;
 	return (result);
 }
-
 
 char	**second_split(char *str)
 {

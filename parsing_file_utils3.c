@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 10:13:48 by fmalizia          #+#    #+#             */
-/*   Updated: 2023/03/15 10:13:57 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/15 13:58:10 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,9 @@ void	*ft_realloc_rt(void *ptr, size_t size)
 	{
 		return (NULL);
 	}
-	ft_memcpy(new_ptr, ptr, old_size < size ? old_size : size);
+	if (old_size < size)
+		size = old_size;
+	ft_memcpy(new_ptr, ptr, size);
 	free(ptr);
 	return (new_ptr);
 }
