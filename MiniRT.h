@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MiniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeancarlen <jeancarlen@student.42.fr>      +#+  +:+       +#+        */
+/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:42 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/13 17:19:18 by jeancarlen       ###   ########.fr       */
+/*   Updated: 2023/03/15 10:09:42 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,6 +233,8 @@ void		*ft_realloc_rt(void *ptr, size_t size);
 void		free_struc(t_data *data);
 void		free_light(t_data *data);
 t_light		*get_light_type(t_light *light, char type);
+void		cam2(t_data *data);
+t_vector	get_light2(t_data *data, t_rays	*ray_light, int s, double d_light);
 
 #endif
 

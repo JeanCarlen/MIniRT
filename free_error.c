@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_error.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/15 09:58:15 by fmalizia          #+#    #+#             */
+/*   Updated: 2023/03/15 10:16:04 by fmalizia         ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "MiniRT.h"
 
 int	does_it_segf(char *str)
@@ -83,7 +95,6 @@ void	free_struc(t_data *data)
 		free(current);
 		current = next;
 	}
-	//free(data->object);
 }
 
 void	free_light(t_data *data)

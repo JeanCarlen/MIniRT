@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_file_utils3.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/15 10:13:48 by fmalizia          #+#    #+#             */
+/*   Updated: 2023/03/15 10:13:57 by fmalizia         ###   ########.ch       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "MiniRT.h"
 
-void*ft_realloc_rt_tab(void *ptr, size_t size)
+void	*ft_realloc_rt_tab(void *ptr, size_t size)
 {
 	void	*new_ptr;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeancarlen <jeancarlen@student.42.fr>      +#+  +:+       +#+        */
+/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:35:23 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/14 00:25:21 by jeancarlen       ###   ########.fr       */
+/*   Updated: 2023/03/15 10:15:46 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,7 @@ int	escape(int keycode, t_data *data)
 	if (keycode == K_KEY)
 		data->camera.pos.z -= 1;
 	if (keycode == KEY_ESC)
-	{
 		close_window(data);
-		// ^o^ is broken ^u^
-	}
 	mlx_destroy_image(data->mlx.mlx_ptr, data->mlx.img);
 	data->mlx.img = mlx_new_image(data->mlx.mlx_ptr, W, H);
 	data->mlx.addr = mlx_get_data_addr(data->mlx.img, &data->mlx.bits_per_pixel,

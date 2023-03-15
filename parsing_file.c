@@ -54,10 +54,10 @@ char	*readfile(char *filename)
 
 char **split_string(const char *str, char sep)
 {
-	size_t count = 0;
-	size_t i = 0;
-	size_t j = 0;
-	size_t len = 0;
+	size_t	count = 0;
+	size_t	i = 0;
+	size_t	j = 0;
+	size_t	len = 0;
 	char **result = NULL;
 
 	if (str == NULL)
@@ -120,7 +120,6 @@ char	**second_split(char *str)
 	word_count = 0;
 	word_start = str;
 	word_end = str;
-
 	while (*word_end != '\0')
 	{
 		if (ft_isspace(*word_end))
@@ -138,13 +137,13 @@ char	**second_split(char *str)
 			if (!words[word_count])
 			{
 				i = 0;
-				while(i < word_count)
+				while (i < word_count)
 				{
 					free(words[i]);
 					i++;
 				}
 				free(words);
-				return NULL;
+				return (NULL);
 			}
 			ft_strncpy_rt(words[word_count], word_start, word_length);
 			words[word_count][word_length] = '\0';
@@ -157,7 +156,6 @@ char	**second_split(char *str)
 	return (words);
 }
 
-
 void	convert_tab(char **tab, t_data *data)
 {
 	int		x;
@@ -168,7 +166,7 @@ void	convert_tab(char **tab, t_data *data)
 		if (tab[x][0] == '\0')
 		{
 			x++;
-			continue;
+			continue ;
 		}
 		if (contains_alpha(tab[x]))
 		{

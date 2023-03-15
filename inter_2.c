@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inter_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jeancarlen <jeancarlen@student.42.fr>      +#+  +:+       +#+        */
+/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:14:38 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/13 17:19:19 by jeancarlen       ###   ########.fr       */
+/*   Updated: 2023/03/15 10:00:25 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	inter_sphere(t_data *data, t_form *current, t_rays *ray)
 	else if (ray->t1 > 0)
 		ray->t = ray->t1;
 	else
-		return(FALSE);
+		return (FALSE);
 	hit_point(data, current, ray);
 	return (TRUE);
 }
