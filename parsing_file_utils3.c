@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 10:13:48 by fmalizia          #+#    #+#             */
-/*   Updated: 2023/03/15 13:58:10 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/16 11:07:08 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,20 @@ void	*ft_realloc_rt(void *ptr, size_t size)
 	ft_memcpy(new_ptr, ptr, size);
 	free(ptr);
 	return (new_ptr);
+}
+
+int	contains_alpha(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_isalpha(str[i]))
+		{
+			return (1);
+		}
+		i++;
+	}
+	return (0);
 }

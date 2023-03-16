@@ -6,11 +6,65 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 10:12:48 by fmalizia          #+#    #+#             */
-/*   Updated: 2023/03/15 14:01:46 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/16 11:06:45 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MiniRT.h"
+
+static const char	*skip_stuff(const char *str, int *neg)
+{
+	while (ft_isspace(*str))
+		str++;
+	if (*str == '-')
+	{
+		*neg = -1;
+		str++;
+	}
+	else if (*str == '+')
+		str++;
+	return (str);
+}
+
+static float	end_stuff(const char *str)
+{
+	while (ft_isspace(*str))
+		str++;
+	if (*str != '\0')
+	{
+		printf("Error: invalid input string\n");
+		return (0.0f);
+	}
+	return (1.0f);
+}
+
+float	ft_strtof(const char *str)
+{
+	float	result;
+	int		is_negative;
+	float	decimal_multiplier;
+
+	result = 0.0f;
+	is_negative = 1;
+	decimal_multiplier = 0.1f;
+	str = skip_stuff(str, &is_negative);
+	while (ft_isdigit(*str))
+	{
+		result = result * 10.0f + (*str - '0');
+		str++;
+	}
+	if (*str == '.')
+	{
+		str++;
+		while (ft_isdigit(*str))
+		{
+			result += decimal_multiplier * (*str - '0');
+			decimal_multiplier *= 0.1f;
+			str++;
+		}
+	}
+	return (result * is_negative * end_stuff(str));
+}
 
 int	ft_stoi(char *str)
 {
@@ -37,51 +91,6 @@ int	ft_stoi(char *str)
 	return (sign * result);
 }
 
-float	ft_strtof(const char *str)
-{
-	float	result;
-	int		is_negative;
-	float	decimal_multiplier;
-
-	result = 0.0f;
-	is_negative = 0;
-	decimal_multiplier = 0.1f;
-	while (ft_isspace(*str))
-		str++;
-	if (*str == '-')
-	{
-		is_negative = 1;
-		str++;
-	}
-	else if (*str == '+')
-		str++;
-	while (ft_isdigit(*str))
-	{
-		result = result * 10.0f + (*str - '0');
-		str++;
-	}
-	if (*str == '.')
-	{
-		str++;
-		while (ft_isdigit(*str))
-		{
-			result += decimal_multiplier * (*str - '0');
-			decimal_multiplier *= 0.1f;
-			str++;
-		}
-	}
-	if (is_negative)
-		result = -result;
-	while (ft_isspace(*str))
-		str++;
-	if (*str != '\0')
-	{
-		printf("Error: invalid input string\n");
-		return (0.0f);
-	}
-	return (result);
-}
-
 int	ft_strinstr(const char *str, const char *substr)
 {
 	int	i;
@@ -104,22 +113,6 @@ int	ft_strinstr(const char *str, const char *substr)
 			}
 			if (substr[j] == '\0')
 				return (1);
-		}
-		i++;
-	}
-	return (0);
-}
-
-int	contains_alpha(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (ft_isalpha(str[i]))
-		{
-			return (1);
 		}
 		i++;
 	}
