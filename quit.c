@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcarlen <jcarlen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 16:35:23 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/15 14:01:40 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/16 12:05:12 by jcarlen          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,10 @@
 
 int	close_window(t_data *data)
 {
-	printf("data struct\n");
 	free_struc(data);
-	printf("data light\n");
 	free_light(data);
-	printf("data mlx\n");
 	if (data->mlx.mlx_ptr)
 		mlx_destroy_image(data->mlx.mlx_ptr, data->mlx.img);
-	printf("data all\n");
 	free(data);
 	data = NULL;
 	exit(0);

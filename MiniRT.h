@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MiniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jcarlen <jcarlen@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:42 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/15 14:01:38 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/16 16:24:16 by jcarlen          ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,15 @@ typedef struct s_data
 	t_mlx	mlx;
 	int		test;
 }	t_data;
+
+typedef struct s_bordel
+{
+	char	buffer;
+	char	*line;
+	size_t	line_size;
+	ssize_t	bytes_read;
+	int		i;
+}	t_bordel;
 
 /*init_parsing*/
 t_form		*init_form(void);
@@ -238,6 +247,19 @@ void		cam2(t_data *data);
 t_vector	get_light2(t_data *data, t_rays	*ray_light, int s, double d_light);
 int			get_t_cyl(t_form *current, t_rays *ray, t_vector *oc);
 int			get_t(t_rays *ray);
+
+///
+void		convert_tab_2(char *str, t_data *data, int x);
+char		*readfile_3(ssize_t bytes_read, char *line,
+				size_t *line_size, char *buffer);
+void		readfile_2(int fd, char *filename);
+char		**split_string_free(size_t j, char **result);
+size_t		set_count(const char *str, char sep);
+char		**split_string_2(const char *str, char sep, char **result);
+char		**second_split_free(int word_count, char **words);
+char		**second_split_2(char **w, char *word_end, char *word_start,
+				int w_len);
+char		**second_split_3(char **w, int w_count, int w_len);
 
 #endif
 
