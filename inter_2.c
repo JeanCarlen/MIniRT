@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:14:38 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/17 14:49:06 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/17 15:15:17 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	hit_point(t_data *data, t_form *current, t_rays *ray)
 		ray->n = normalize(minus(minus(ray->p, current->coord), vm));
 	}
 	c_light->light_dir = normalize(c_light->light_dir);
-	d = (dot(ray->n, ft_mult(-1, c_light->light_dir)));
+	d = dot(ray->n, ft_mult(-1, c_light->light_dir)) + a_light->ratio;
 	if (d < 0 && current->type == 'C')
 		d *= -1;
 	ray->col = ft_mult(d, current->color);

@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:52:44 by fmalizia          #+#    #+#             */
-/*   Updated: 2023/03/15 09:56:40 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/17 14:58:20 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ void	light_2(char *str, t_light *new_l, t_data *data)
 	vector = split_string(ret[1], ',');
 	put_coord_light(vector, new_l, data);
 	new_l->ratio = ft_strtof(ret[2]);
-	vector = split_string(ret[3], ',');
-	put_color_light(vector, new_l, data);
+	if (ret[3])
+	{
+		vector = split_string(ret[3], ',');
+		put_color_light(vector, new_l, data);
+	}
 	free_tab(ret);
 }
