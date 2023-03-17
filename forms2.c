@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 09:51:25 by fmalizia          #+#    #+#             */
-/*   Updated: 2023/03/15 12:33:36 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/17 14:55:02 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void	cam2(t_data *data)
 	}
 	data->camera.right = normalize(data->camera.right);
 	data->camera.up = normalize(cross(data->camera.orient, data->camera.right));
+	if (data->camera.up.y < 0)
+		data->camera.up = ft_mult(-1, data->camera.up);
 }
 
 void	put_orient_cam(char **vector, t_data *data)
