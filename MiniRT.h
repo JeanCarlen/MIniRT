@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:42 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/21 11:42:00 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/21 16:34:24 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,64 +118,127 @@ typedef struct s_data
 	t_mlx	mlx;
 }	t_data;
 
+/*convert_tab */
+void		convert_tab(char **tab, t_data *data);
+void		convert_tab_2(char *str, t_data *data, int x);
+
+/*forms*/
+void		sphere(char *str, int x, t_data *data);
+void		sphere_2(char *str, t_form *new_f, t_data *data);
+void		plan(char *str, int x, t_data *data);
+void		plan_2(char *str, t_form *new_f, t_data *data);
+void		put_coord_cam(char **vector, t_data *data);
+
+/*forms_2*/
+void		cylindre(char *str, int x, t_data *data);
+void		cylindre_2(char *str, t_form *new_f, t_data *data);
+void		cam(char *str, t_data *data);
+void		cam2(t_data *data);
+void		put_orient_cam(char **vector, t_data *data);
+
+/*forms_3*/
+void		ambiant(char *str, t_data *data);
+void		ambiant_2(char *str, t_light *new_l, t_data *data);
+void		light(char *str, int x, t_data *data);
+void		light_2(char *str, t_light *new_l, t_data *data);
+
+/*forms_4*/
+void		put_color_form(char **vector, t_form *new_f, t_data *data);
+void		put_orient_form(char **vector, t_form *new_f, t_data *data);
+void		put_coord_form(char **vector, t_form *new_f, t_data *data);
+void		put_color_light(char **vector, t_light *new_l, t_data *data);
+void		put_coord_light(char **vector, t_light *new_l, t_data *data);
+
+/*free_error*/
+int			does_it_segf(char *str);
+int			tab_check(char **tab);
+int			tab_check_rgb(char **tab);
+void		free_struc(t_data *data);
+void		free_light(t_data *data);
+
 /*init_parsing*/
 t_form		*init_form(void);
 t_light		*init_light(void);
 void		init_cam(t_data *data);
 void		init_all(t_data *data);
-int			check_args(char *arg);
-void		run_program(t_data *data);
 
 /*init*/
 void		ft_init_window(t_data *data);
 void		set_scene(t_data *data);
 
-/*inter*/
+/*inter_2*/
 int			inter_sphere(t_data *data, t_form *current, t_rays *ray);
-int			inter_plane(t_data *data, t_form *current, t_rays *ray);
-int			inter_cylinder(t_data *data, t_form *current, t_rays *ray);
-int			routine_inter(t_data *data, t_rays *ray);
 int			hit_point(t_data *data, t_form *current, t_rays *ray);
+t_vector	extra_amb(t_form *current, t_rays *ray, t_light *a_light);
+int			inter_plane(t_data *data, t_form *current, t_rays *ray);
 int			plane_found(t_data *data, t_form *current, t_rays *ray);
+
+/*inter*/
+int			inter_cylinder(t_data *data, t_form *current, t_rays *ray);
+int			get_t(t_rays *ray);
+int			get_t_cyl(t_form *current, t_rays *ray, t_vector *oc);
+int			routine_inter(t_data *data, t_rays *ray);
+
+/*jeanchoisiunnom*/
+t_light		*get_light_type(t_light *light, char type);
+void		print_tab(char **tab);
 
 /*launch*/
 void		load_scene(t_data *data);
+t_vector	add_amb(t_data *data, t_rays *ray);
 t_vector	get_light(t_data *data);
+t_vector	get_light2(t_data *data, t_rays	*ray_light, int s, double d_light);
 t_light		*light_details(t_data *data, t_light *c_light);
 
-/*parsing_file_utils*/
-void		print_tab(char **tab); //print a tab
-int			ft_stoi(char *str); //convert str to int
-float		ft_strtof(const char *str); //convert str to float
-//check if there is a specified str in another str
-int			ft_strinstr(const char *str, const char *substr);
-int			contains_alpha(char *str);//check if there is a alpha char in str
-void		free_tab(char **tab);//free a tab
-int			ft_isspace(int c);
-//finds the last element of the lights liked list and returns it
-t_light		*last_light(t_data *data);
-// finds the last element of the objects liked list and returns it
-t_form		*last_obj(t_data *data);
-void		*ft_realloc_rt_tab(void *ptr, size_t size);
+/*main*/
+int			check_args(char *arg);
+void		run_program(t_data *data);
 
-/*parsing_file*/
-//read all the file and return it as a big str
-char		*readfile(char *filename);
-//take a str, split the elements every <sep> and rtn all the elements as a tab
-char		**split_string(const char *str, char sep);
-char		**second_split(char *str);
-//take a tab that contains string, split them and save them in a struct.
-void		convert_tab(char **tab, t_data *data);
+/*parsing_file_utils*/
+float		ft_strtof(const char *str);
+int			ft_stoi(char *str);
+int			ft_strinstr(const char *str, const char *substr);
+
+/*parsing_file_utils_2*/
+void		free_tab(char **tab);
+int			ft_isspace(int c);
+t_light		*last_light(t_data *data);
+t_form		*last_obj(t_data *data);
+char		*ft_strncpy_rt(char *dest, const char *src, size_t n);
+
+/*parsing_file_utils_3*/
+void		*ft_realloc_rt_tab(void *ptr, size_t size);
+void		*ft_realloc_rt(void *ptr, size_t size);
+int			contains_alpha(char *str);
 
 /*quit*/
 int			close_window(t_data *data);
 int			escape(int keycode, t_data *data);
 
+/*readfile*/
+char		*readfile(char *filename);
+void		readfile_2(int fd, char *filename);
+char		*readfile_3(ssize_t bytes_read, char *line,
+				size_t *line_size, char *buffer);
+
+/*secondsplit*/
+char		**second_split(char *str);
+char		**second_split_free(int w_count, char **words);
+char		**second_split_2(char **w, char *word_end,
+				char *word_start, int w_len);
+char		**second_split_3(char **w, int w_count, int w_len);
+
+/*splitstring*/
+char		**split_string(const char *str, char sep);
+char		**split_string_2(const char *str, char sep, char **result);
+char		**split_string_free(size_t j, char **result);
+size_t		set_count(const char *str, char sep);
+
 /*utils*/
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int			color(double r, double g, double b);
-int			ray_color(int t, int r, int g, int b);
 int			color2(double r, double g, double b);
+int			ray_color(int t, int r, int g, int b);
 void		init_t(t_rays *ray);
 
 /*vectors*/
@@ -191,72 +254,9 @@ double		ft_mult2(t_vector v2, t_vector v1);
 t_vector	ft_plus(t_vector origin, t_vector position);
 double		ft_max(double clr);
 t_vector	ft_divide(t_vector v1, double a);
+/*vectors3*/
 t_vector	ft_mult_vec(t_vector v1, t_vector v2);
 t_vector	add_values(double x, double y, double z);
-
-/*free_error*/
-
-int			does_it_segf(char *str);
-int			tab_check(char **tab);
-int			tab_check_rgb(char **tab);
-
-/*forms*/
-
-void		sphere(char *str, int x, t_data *data);
-void		sphere_2(char *str, t_form *new_f, t_data *data);
-void		plan(char *str, int x, t_data *data);
-void		plan_2(char *str, t_form *new_f, t_data *data);
-void		cylindre(char *str, int x, t_data *data);
-void		cylindre_2(char *str, t_form *new_f, t_data *data);
-void		cam(char *str, t_data *data);
-void		put_orient_cam(char **vector, t_data *data);
-void		put_coord_cam(char **vector, t_data *data);
-void		ambiant(char *str, t_data *data);
-void		ambiant_2(char *str, t_light *new_l, t_data *data);
-void		light(char *str, int x, t_data *data);
-void		light_2(char *str, t_light *new_l, t_data *data);
-void		put_color_form(char **vector, t_form *new_f, t_data *data);
-void		put_orient_form(char **vector, t_form *new_f, t_data *data);
-void		put_coord_form(char **vector, t_form *new_f, t_data *data);
-void		put_color_light(char **vector, t_light *new_l, t_data *data);
-void		put_coord_light(char **vector, t_light *new_l, t_data *data);
 t_vector	cross(t_vector vect_a, t_vector vect_b);
-void		print_vec(char *str, t_vector v);
-
-/*pas trouvé dans les fichiers*/
-
-t_vector	ft_minus(t_vector v1, t_vector v2);
-
-t_vector	add_amb(t_data *data, t_rays *ray);
-char		*ft_strncpy_rt(char *dest, const char *src, size_t n);
-void		*ft_realloc_rt(void *ptr, size_t size);
-void		free_struc(t_data *data);
-void		free_light(t_data *data);
-t_light		*get_light_type(t_light *light, char type);
-void		cam2(t_data *data);
-t_vector	get_light2(t_data *data, t_rays	*ray_light, int s, double d_light);
-int			get_t_cyl(t_form *current, t_rays *ray, t_vector *oc);
-int			get_t(t_rays *ray);
-
-void		convert_tab_2(char *str, t_data *data, int x);
-char		*readfile_3(ssize_t bytes_read, char *line,
-				size_t *line_size, char *buffer);
-void		readfile_2(int fd, char *filename);
-char		**split_string_free(size_t j, char **result);
-size_t		set_count(const char *str, char sep);
-char		**split_string_2(const char *str, char sep, char **result);
-char		**second_split_free(int word_count, char **words);
-char		**second_split_2(char **w, char *word_end, char *word_start,
-				int w_len);
-char		**second_split_3(char **w, int w_count, int w_len);
 
 #endif
-
-/*TO DO*/
-/*
-shadows --ISH --Ish --ish
-orientation de la camera (big step small step) --finish --ish -----issssssshhhhh
-dividing big function remake
-error
-NORMINETTTTTTTTTTTTTTTTTTTTTTTTTE
-*/

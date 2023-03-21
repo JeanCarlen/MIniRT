@@ -73,11 +73,14 @@ t_vector	get_light(t_data *data)
 
 t_vector	get_light2(t_data *data, t_rays	*ray_light, int s, double d_light)
 {
+	t_light	*a_light;
+
+	a_light = get_light_type(data->light, 'A');
 	if (s && ray_light->t * ray_light->t < d_light)
-			ray_light->col = add_values(data->rays.col.x * data->light->ratio
+			ray_light->col = add_values(data->rays.col.x * a_light->ratio
 				* (data->light->color.x / 255), data->rays.col.y
-				* data->light->ratio * (data->light->color.y / 255),
-				data->rays.col.z * data->light->ratio
+				*a_light->ratio * (data->light->color.y / 255),
+				data->rays.col.z * a_light->ratio
 				* (data->light->color.z / 255));
 	else
 		ray_light->col = data->rays.col;

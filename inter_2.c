@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 17:14:38 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/17 15:15:17 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/21 16:07:16 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,22 @@ int	hit_point(t_data *data, t_form *current, t_rays *ray)
 		ray->n = normalize(minus(minus(ray->p, current->coord), vm));
 	}
 	c_light->light_dir = normalize(c_light->light_dir);
-	d = dot(ray->n, ft_mult(-1, c_light->light_dir)) + a_light->ratio;
-	if (d < 0 && current->type == 'C')
-		d *= -1;
+	d = dot(ray->n, ft_mult(-1, c_light->light_dir));
 	ray->col = ft_mult(d, current->color);
+	ray->col = extra_amb(current, ray, a_light);
 	return (TRUE);
+}
+
+t_vector	extra_amb(t_form *current, t_rays *ray, t_light *a_light)
+{
+	t_vector	ret;
+
+	ret = add_values(current->color.x * a_light->ratio
+			* (a_light->color.x / 255) + ray->col.x, current->color.y
+			* a_light->ratio * (a_light->color.y / 255) + ray->col.y,
+			current->color.z * a_light->ratio
+			* (a_light->color.z / 255) + ray->col.z);
+	return (ret);
 }
 
 int	inter_plane(t_data *data, t_form *current, t_rays *ray)
