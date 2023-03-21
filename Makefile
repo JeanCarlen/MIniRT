@@ -6,7 +6,7 @@
 #    By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/26 12:41:46 by nnemeth           #+#    #+#              #
-#    Updated: 2023/03/15 14:02:51 by fmalizia         ###   ########.ch        #
+#    Updated: 2023/03/21 11:52:57 by fmalizia         ###   ########.ch        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,11 @@ CC			= gcc
 
 CFLAGS		= -Wall -Wextra -Werror -g3 #-fsanitize=address 
 
-SRCS		= $(wildcard *.c)
+SRCS		=	convert_tab.c forms.c forms2.c forms3.c forms4.c \
+				free_error.c init_parsing.c init.c inter.c inter_2.c \
+				jeanchoisitunnom.c launch.c main.c parsing_file_utils.c \
+				parsing_file_utils2.c parsing_file_utils3.c quit.c readfile.c \
+				secondsplit.c splitstring.c utils.c vectors.c vectors2.c vectors3.c
 
 OBJS		= ${SRCS:.c=.o}
 

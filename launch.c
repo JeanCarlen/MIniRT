@@ -65,7 +65,7 @@ t_vector	get_light(t_data *data)
 	}
 	minus_tmp = minus(c_light->coord, data->rays.p);
 	dot_light = getnorm(minus_tmp);
-	ray_light.ray_dir = normalize(minus_tmp); 
+	ray_light.ray_dir = normalize(minus_tmp);
 	ray_light.ray_orig = ft_plus(data->rays.p, ft_mult(0.01, data->rays.n));
 	shadow = routine_inter(data, &ray_light);
 	return (get_light2(data, &ray_light, shadow, dot_light));

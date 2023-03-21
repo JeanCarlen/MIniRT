@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:42 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/17 14:47:36 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/21 11:42:00 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,17 +116,7 @@ typedef struct s_data
 	t_light	*light;
 	t_rays	rays;
 	t_mlx	mlx;
-	int		test;
 }	t_data;
-
-typedef struct s_bordel
-{
-	char	buffer;
-	char	*line;
-	size_t	line_size;
-	ssize_t	bytes_read;
-	int		i;
-}	t_bordel;
 
 /*init_parsing*/
 t_form		*init_form(void);
@@ -248,7 +238,6 @@ t_vector	get_light2(t_data *data, t_rays	*ray_light, int s, double d_light);
 int			get_t_cyl(t_form *current, t_rays *ray, t_vector *oc);
 int			get_t(t_rays *ray);
 
-///
 void		convert_tab_2(char *str, t_data *data, int x);
 char		*readfile_3(ssize_t bytes_read, char *line,
 				size_t *line_size, char *buffer);

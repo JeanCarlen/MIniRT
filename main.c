@@ -6,7 +6,7 @@
 /*   By: fmalizia <fmalizia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 12:41:42 by nnemeth           #+#    #+#             */
-/*   Updated: 2023/03/15 14:01:37 by fmalizia         ###   ########.ch       */
+/*   Updated: 2023/03/21 11:42:12 by fmalizia         ###   ########.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static int	setup_data(char *arg, t_data *data)
 	tab = NULL;
 	init_all(data);
 	lines = readfile(arg);
+	if (lines == NULL)
+		return (-1);
 	tab = split_string(lines, '\n');
 	convert_tab(tab, data);
 	if (lines)
@@ -59,13 +61,13 @@ int	main(int argc, char **argv)
 	data = malloc(sizeof(t_data));
 	if (!data)
 		return (-1);
-	data->test = 0;
+	data->mlx.mlx_ptr = NULL;
 	if (argc == 2)
 	{
 		check_args(argv[1]);
 		if (setup_data(argv[1], data) < 0)
 		{
-			printf("Error in the line");
+			printf("Error in the file");
 			return (-1);
 		}
 		run_program(data);
